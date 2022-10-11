@@ -21,7 +21,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableJpaAuditing
 @Table()
 @EntityListeners(AuditingEntityListener.class)
-public class demo {
+public class Demo {
     @Id
     @Column()
     private int id;
