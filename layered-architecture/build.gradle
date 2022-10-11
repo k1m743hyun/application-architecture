@@ -1,0 +1,116 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.4'
+	id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+	id 'java'
+}
+
+allprojects {
+	repositories {
+		mavenCentral()
+	}
+}
+
+bootJar { enabled = false }
+
+subprojects {
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'java'
+
+	group = 'com.k1m743hyun'
+	version = '0.0.1-SNAPSHOT'
+	sourceCompatibility = '11'
+
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+	}
+
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+		implementation 'org.springframework.boot:spring-boot-starter-web:2.5.5'
+
+		implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+		implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+		annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+		annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
+		annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+		compileOnly 'org.projectlombok:lombok'
+		annotationProcessor 'org.projectlombok:lombok'
+
+		testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.5'
+		testCompileOnly 'org.projectlombok:lombok'
+		testAnnotationProcessor 'org.projectlombok:lombok'
+	}
+
+	tasks.named('test') {
+		useJUnitPlatform()
+	}
+}
+
+project(':boot') {
+	dependencies {
+		implementation project(':presentation')
+		implementation project(':application')
+		implementation project(':domain')
+		implementation project(':infrastructure')
+	}
+
+	test {
+		exclude '**/*'
+		useJUnitPlatform()
+	}
+}
+
+project(':presentation') {
+	dependencies {
+		implementation project(':application')
+		implementation project(':domain')
+		testImplementation project(':boot')
+	}
+	bootJar { enabled = false }
+}
+
+project(':application') {
+	dependencies {
+		implementation project(':domain')
+	}
+	bootJar { enabled = false }
+}
+
+project(':domain') {
+	dependencies {
+		testImplementation project(':boot')
+	}
+	bootJar { enabled = false }
+}
+
+project(':infrastructure') {
+	dependencies {
+		implementation project(':presentation')
+		implementation project(':domain')
+		testImplementation project(':boot')
+	}
+	bootJar { enabled = false }
+}
+
+task printVersion {
+	doLast {
+		println project(':boot').version
+	}
+}
+
+clean {
+	delete file('subprojects/boot/out')
+	delete file('subprojects/presentation/out')
+	delete file('subprojects/application/out')
+	delete file('subprojects/domain/out')
+	delete file('subprojects/infrastructure/out')
+	delete file('subprojects/boot/src/main/generated')
+	delete file('subprojects/presentation/src/main/generated')
+	delete file('subprojects/application/src/main/generated')
+	delete file('subprojects/domain/src/main/generated')
+	delete file('subprojects/infrastructure/src/main/generated')
+}

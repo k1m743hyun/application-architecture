@@ -1,0 +1,13 @@
+rootProject.name = 'layered-architecture'
+
+include 'boot'
+include 'presentation'
+include 'application'
+include 'domain'
+include 'infrastructure'
+
+def subProjectDir = "subprojects";
+for (project in rootProject.children) {
+    project.projectDir = file("${subProjectDir}/${project.name}")
+}
+

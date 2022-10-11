@@ -1,0 +1,9 @@
+# Server
+server:
+  port: 8081
+  shutdown: graceful
+  tomcat:
+    connection-timeout: 2800
+    threads:
+      max: 250
+      min-spare: 250
