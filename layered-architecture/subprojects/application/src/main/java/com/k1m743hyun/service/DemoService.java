@@ -1,5 +1,6 @@
 package com.k1m743hyun.service;
 
+import com.k1m743hyun.data.dto.request.DemoRequestDto;
 import com.k1m743hyun.data.dto.response.DemoResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,12 +13,7 @@ public class DemoService {
 
     private final DemoDomainService demoDomainService;
 
-    public DemoResponseDto findById(int id) {
-        return demoDomainService.findById(id);
+    public DemoResponseDto getDemo(DemoRequestDto demoRequestDto) {
+        return demoDomainService.getDemo(demoRequestDto);
     }
-
-    public DemoResponseDto findByName(String name) {
-        return demoDomainService.findByName(name);
-    }
-
 }

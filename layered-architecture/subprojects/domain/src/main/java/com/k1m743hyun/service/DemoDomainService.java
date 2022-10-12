@@ -1,5 +1,6 @@
 package com.k1m743hyun.service;
 
+import com.k1m743hyun.data.dto.request.DemoRequestDto;
 import com.k1m743hyun.data.dto.response.DemoResponseDto;
 import com.k1m743hyun.data.mapper.DemoMapper;
 import com.k1m743hyun.repository.DemoRepository;
@@ -14,11 +15,18 @@ public class DemoDomainService {
 
     private final DemoMapper demoMapper;
 
-    public DemoResponseDto findById(int id) {
-        return demoMapper.toDto(demoRepository.findById(id));
-    }
+    public DemoResponseDto getDemo(DemoRequestDto demoRequestDto) {
 
-    public DemoResponseDto findByName(String name) {
-        return demoMapper.toDto(demoRepository.findByName(name));
+        if (demoRequestDto.getName() == null) {
+            System.out.println("id");
+            System.out.println(demoRequestDto.getId());
+            System.out.println(demoRequestDto.getName());
+            return demoMapper.toDto(demoRepository.findById(demoRequestDto.getId()));
+        } else {
+            System.out.println("name");
+            System.out.println(demoRequestDto.getId());
+            System.out.println(demoRequestDto.getName());
+            return demoMapper.toDto(demoRepository.findByName(demoRequestDto.getName()));
+        }
     }
 }

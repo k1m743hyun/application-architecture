@@ -1,9 +1,15 @@
 # Server
 server:
-  port: 8081
+  port: 8080
   shutdown: graceful
   tomcat:
     connection-timeout: 2800
     threads:
       max: 250
       min-spare: 250
+
+spring:
+  datasource:
+    url: "jdbc:h2:tcp://localhost/~/personal/application-architecture/layered-architecture/test"
+    driver-class-name: "org.h2.Driver"
+    username: "sa"

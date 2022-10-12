@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class DemoRequestDto {
-    private int id;
+
+    private Long id;
     private String name;
 }

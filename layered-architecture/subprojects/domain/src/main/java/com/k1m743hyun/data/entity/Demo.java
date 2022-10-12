@@ -19,13 +19,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @AllArgsConstructor
 @Entity
 @EnableJpaAuditing
-@Table()
+@Table(name = "member")
 @EntityListeners(AuditingEntityListener.class)
 public class Demo {
-    @Id
-    @Column()
-    private int id;
 
-    @Column()
+    @Id
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "name")
     private String name;
 }

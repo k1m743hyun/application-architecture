@@ -9,6 +9,6 @@ import lombok.ToString;
 @ToString
 public class DemoResponseDto {
 
-    private int id;
+    private Long id;
     private String name;
 }

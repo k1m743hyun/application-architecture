@@ -9,5 +9,6 @@ import org.mapstruct.Mapper;
 
 @Mapper(config = ObjectMapperConfig.class)
 public interface DemoMapper {
+
     DemoResponseDto toDto(Optional<Demo> request);
 }

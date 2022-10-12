@@ -14,7 +14,7 @@ public class DemoRepositoryImpl implements DemoRepository {
     private final DemoJpaRepository demoJpaRepository;
 
     @Override
-    public Optional<Demo> findById(int id) {
+    public Optional<Demo> findById(Long id) {
         return demoJpaRepository.findById(id);
     }
 
