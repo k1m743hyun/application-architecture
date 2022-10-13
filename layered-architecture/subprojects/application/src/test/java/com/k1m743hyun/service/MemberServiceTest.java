@@ -1,24 +1,23 @@
 package com.k1m743hyun.service;
 
-import com.k1m743hyun.data.dto.response.DemoResponseDto;
-import com.k1m743hyun.data.mapper.DemoMapper;
-import org.junit.jupiter.api.Test;
+import com.k1m743hyun.data.dto.response.MemberResponseDto;
+import com.k1m743hyun.data.mapper.MemberMapper;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class DemoServiceTest {
+class MemberServiceTest {
 
     @InjectMocks
-    DemoService demoService;
+    MemberService memberService;
 
     @Mock
-    DemoDomainService demoDomainService;
+    MemberDomainService memberDomainService;
 
     @Mock
-    DemoMapper demoMapper;
+    MemberMapper memberMapper;
 
     //@test
     void whenRequestGetDemo_thenReturnSuccess() throws Exception{
@@ -26,7 +25,7 @@ class DemoServiceTest {
         Long id = Long.valueOf(1);
         String name = "spring";
 
-        DemoResponseDto demoResponseDto = DemoResponseDto.builder().build();
+        MemberResponseDto memberResponseDto = MemberResponseDto.builder().build();
         //JunitTestUtils.set
     }
 }

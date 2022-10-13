@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Builder
 @ToString
-public class DemoResponseDto {
+public class MemberResponseDto {
 
     private Long id;
     private String name;
