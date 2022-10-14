@@ -21,5 +21,5 @@ spring:
         format_sql: "true"
   datasource:
     driver-class-name: "org.h2.Driver"
-    url: "jdbc:h2:tcp://localhost/~/personal/application-architecture/layered-architecture/test"
+    url: "jdbc:h2:tcp://localhost/~/application-architecture/layered-architecture/test"
     username: "sa"
