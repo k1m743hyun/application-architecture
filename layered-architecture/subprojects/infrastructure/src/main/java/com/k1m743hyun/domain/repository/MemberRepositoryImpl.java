@@ -14,10 +14,10 @@ public class MemberRepositoryImpl implements MemberRepository {
 
     private final MemberJpaRepository memberJpaRepository;
 
-    @Override
-    public Member save(Member member) {
-        return memberJpaRepository.save(member);
-    }
+//    @Override
+//    public Member save(Member member) {
+//        return memberJpaRepository.save(member);
+//    }
 
     @Override
     public Optional<Member> findById(Long id) {
@@ -29,8 +29,8 @@ public class MemberRepositoryImpl implements MemberRepository {
         return memberJpaRepository.findByName(name);
     }
 
-    @Override
-    public List<Member> findAll() {
-        return memberJpaRepository.findAll();
-    }
+//    @Override
+//    public List<Member> findAll() {
+//        return memberJpaRepository.findAll();
+//    }
 }

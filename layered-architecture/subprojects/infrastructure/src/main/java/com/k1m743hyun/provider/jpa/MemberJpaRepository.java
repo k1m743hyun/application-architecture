@@ -6,17 +6,17 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MemberJpaRepository extends JpaRepository<Member, Long>, MemberRepository {
+public interface MemberJpaRepository extends JpaRepository<Member, Long> {
 
-    @Override
-    Member save(Member member);
+//    @Override
+//    Member save(Member member);
 
     @Override
     Optional<Member> findById(Long id);
 
-    @Override
+    //@Override
     Optional<Member> findByName(String name);
 
-    @Override
-    List<Member> findAll();
+//    @Override
+//    List<Member> findAll();
 }
