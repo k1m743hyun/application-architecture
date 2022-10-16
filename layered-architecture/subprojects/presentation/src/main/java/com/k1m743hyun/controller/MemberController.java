@@ -16,7 +16,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/hello", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/member", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MemberController {
 
     private final MemberService memberService;
@@ -27,7 +27,7 @@ public class MemberController {
         @ApiImplicitParam(name = "name", paramType = "query", dataType = "string", required = false, value = "Name", example = "spring")
     })
     @GetMapping
-    public MemberResponseDto getDemo(@ApiIgnore MemberRequestVo memberRequestVo) {
+    public MemberResponseDto getMember(@ApiIgnore MemberRequestVo memberRequestVo) {
         System.out.println(memberRequestVo.getId());
         System.out.println(memberRequestVo.getName());
         MemberRequestDto memberRequestDto = memberRequestVo.convert();
