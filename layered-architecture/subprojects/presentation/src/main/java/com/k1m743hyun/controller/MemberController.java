@@ -9,9 +9,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
@@ -27,12 +25,34 @@ public class MemberController {
         @ApiImplicitParam(name = "name", paramType = "query", dataType = "string", required = false, value = "Name", example = "spring")
     })
     @GetMapping
-    public MemberResponseDto getMember(@ApiIgnore MemberRequestVo memberRequestVo) {
-        System.out.println(memberRequestVo.getId());
-        System.out.println(memberRequestVo.getName());
-        MemberRequestDto memberRequestDto = memberRequestVo.convert();
-        System.out.println(memberRequestDto.getId());
-        System.out.println(memberRequestDto.getName());
-        return memberService.getDemo(memberRequestDto);
+    public MemberResponseDto getMember(@ApiIgnore MemberRequestVo requestVo) {
+
+        MemberRequestDto requestDto = requestVo.convert();
+
+        return memberService.getMember(requestDto);
+    }
+
+    @PostMapping
+    public MemberRequestDto saveMember(MemberRequestVo requestVo) {
+
+        MemberRequestDto requestDto = requestVo.convert();
+
+        return memberService.saveMember(requestDto);
+    }
+
+    @PutMapping
+    public MemberRequestDto editMember(MemberRequestVo requestVo) {
+
+        MemberRequestDto requestDto = requestVo.convert();
+
+        return memberService.editMember(requestDto);
+    }
+
+    @DeleteMapping
+    public MemberRequestDto deleteMember(MemberRequestVo requestVo) {
+
+        MemberRequestDto requestDto = requestVo.convert();
+
+        return memberService.deleteMember(requestDto);
     }
 }
