@@ -16,19 +16,22 @@ public class MemberDomainService extends Exception {
 
     private final MemberMapper memberMapper;
 
-    /* 조회
+    /**
+     * 조회
      */
     public Optional<Member> getMember(MemberRequestDto requestDto) {
         return memberRepository.getMember(memberMapper.toEntity(requestDto));
     }
 
-    /* 등록
+    /**
+     * 등록
      */
     public Optional<Member> saveMember(MemberRequestDto requestDto) {
         return memberRepository.saveMember(memberMapper.toEntity(requestDto));
     }
 
-    /* 수정
+    /**
+     * 수정
      */
     public Optional<Member> editMember(MemberRequestDto requestDto) {
 
@@ -39,7 +42,8 @@ public class MemberDomainService extends Exception {
         return member;
     }
 
-    /* 삭제
+    /**
+     * 삭제
      */
     public Optional<Member> deleteMember(MemberRequestDto requestDto) {
         return memberRepository.deleteMember(memberMapper.toEntity(requestDto));

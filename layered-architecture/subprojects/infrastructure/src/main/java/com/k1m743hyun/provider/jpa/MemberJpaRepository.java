@@ -6,16 +6,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberJpaRepository extends JpaRepository<Member, Long> {
 
-    /* 조회
+    /**
+     * 조회
      */
     Optional<Member> findById(Long id);
 
-    /* 등록
+    /**
+     * 등록
      */
 //    @Override
 //    Optional<Member> save(Member member);
 
-    /* 삭제
+    /**
+     * 삭제
      */
     @Override
     void deleteById(Long id);

@@ -15,14 +15,16 @@ public class MemberRepositoryImpl implements MemberRepository {
 
     private final MemberJpaRepository memberJpaRepository;
 
-    /* 조회
+    /**
+     * 조회
      */
     @Override
     public Optional<Member> getMember(Member member) {
         return memberJpaRepository.findById(member.getId());
     }
 
-    /* 등록
+    /**
+     * 등록
      */
     @Override
     public Optional<Member> saveMember(Member member) {
@@ -32,14 +34,16 @@ public class MemberRepositoryImpl implements MemberRepository {
         return Optional.of(member);
     }
 
-    /* 수정
+    /**
+     * 수정
      */
 //    @Override
 //    public Optional<Member> editMember(Member member) {
 //        return memberJpaRepository.findById(member.getId());
 //    }
 
-    /* 삭제
+    /**
+     * 삭제
      */
     @Override
     public Optional<Member> deleteMember(Member member) {
