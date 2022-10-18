@@ -15,18 +15,19 @@ public class MemberDomainService {
 
     private final MemberMapper memberMapper;
 
-    public MemberResponseDto getDemo(MemberRequestDto memberRequestDto) {
+    public MemberResponseDto getMember(MemberRequestDto requestDto) {
+        return memberMapper.toDto(memberRepository.getMember(memberMapper.toEntity(requestDto)));
+    }
 
-        if (memberRequestDto.getName() == null) {
-            System.out.println("id");
-            System.out.println(memberRequestDto.getId());
-            System.out.println(memberRequestDto.getName());
-            return memberMapper.toDto(memberRepository.findById(memberRequestDto.getId()));
-        } else {
-            System.out.println("name");
-            System.out.println(memberRequestDto.getId());
-            System.out.println(memberRequestDto.getName());
-            return memberMapper.toDto(memberRepository.findByName(memberRequestDto.getName()));
-        }
+    public MemberResponseDto saveMember(MemberRequestDto requestDto) {
+        return memberMapper.toDto(memberRepository.saveMember(memberMapper.toEntity(requestDto)));
+    }
+
+    public MemberResponseDto editMember(MemberRequestDto requestDto) {
+        return memberMapper.toDto(memberRepository.editMember(memberMapper.toEntity(requestDto)));
+    }
+
+    public MemberResponseDto deleteMember(MemberRequestDto requestDto) {
+        return memberMapper.toDto(memberRepository.deleteMember(memberMapper.toEntity(requestDto)));
     }
 }

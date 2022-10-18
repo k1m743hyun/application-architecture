@@ -1,6 +1,7 @@
 package com.k1m743hyun.data.mapper;
 
 import com.k1m743hyun.config.ObjectMapperConfig;
+import com.k1m743hyun.data.dto.request.MemberRequestDto;
 import com.k1m743hyun.data.dto.response.MemberResponseDto;
 import com.k1m743hyun.data.entity.Member;
 import java.util.Optional;
@@ -11,5 +12,5 @@ public interface MemberMapper {
 
     MemberResponseDto toDto(Optional<Member> request);
 
-    //Demo toEntity(DemoRequestDto requestDto);
+    Member toEntity(MemberRequestDto requestDto);
 }
