@@ -31,4 +31,11 @@ public class Member {
 
     //@Column(name = "name")
     private String name;
+
+    public Member update(String name) {
+
+        this.name = name;
+
+        return this;
+    }
 }

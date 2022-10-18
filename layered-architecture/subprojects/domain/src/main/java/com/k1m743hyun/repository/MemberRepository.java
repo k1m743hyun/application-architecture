@@ -5,11 +5,19 @@ import java.util.Optional;
 
 public interface MemberRepository {
 
+    /* 조회
+     */
     Optional<Member> getMember(Member member);
 
+    /* 등록
+     */
     Optional<Member> saveMember(Member member);
 
-    Optional<Member> editMember(Member member);
+    /* 수정
+     */
+    //Optional<Member> editMember(Member member);
 
+    /* 삭제
+     */
     Optional<Member> deleteMember(Member member);
 }
