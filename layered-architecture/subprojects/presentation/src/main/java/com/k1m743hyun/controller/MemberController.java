@@ -23,7 +23,7 @@ public class MemberController {
 
     @ApiOperation(value = "사용자 정보 조회", notes = "사용자의 ID를 통해 사용자의 정보를 조회한다.")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "id", paramType = "query", dataType = "long", required = false, value = "사용자 아이디", example = "1"),
+        @ApiImplicitParam(name = "id", paramType = "query", dataType = "long", required = true, value = "사용자 아이디", example = "1"),
         @ApiImplicitParam(name = "name", paramType = "query", dataType = "string", required = false, value = "사용자 이름", example = "spring")
     })
     @GetMapping
@@ -36,6 +36,11 @@ public class MemberController {
         return memberService.getMember(requestDto);
     }
 
+    @ApiOperation(value = "사용자 정보 등록", notes = "사용자의 ID를 통해 사용자의 정보를 등록한다.")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "id", paramType = "query", dataType = "long", required = true, value = "사용자 아이디", example = "1"),
+        @ApiImplicitParam(name = "name", paramType = "query", dataType = "string", required = false, value = "사용자 이름", example = "spring")
+    })
     @PostMapping
     public MemberResponseDto saveMember(@ApiIgnore MemberRequestVo requestVo) {
 
@@ -46,6 +51,11 @@ public class MemberController {
         return memberService.saveMember(requestDto);
     }
 
+    @ApiOperation(value = "사용자 정보 수정", notes = "사용자의 ID를 통해 사용자의 정보를 수정한다.")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "id", paramType = "query", dataType = "long", required = true, value = "사용자 아이디", example = "1"),
+        @ApiImplicitParam(name = "name", paramType = "query", dataType = "string", required = false, value = "사용자 이름", example = "spring")
+    })
     @PutMapping
     public MemberResponseDto editMember(@ApiIgnore MemberRequestVo requestVo) {
 
@@ -56,6 +66,11 @@ public class MemberController {
         return memberService.editMember(requestDto);
     }
 
+    @ApiOperation(value = "사용자 정보 삭제", notes = "사용자의 ID를 통해 사용자의 정보를 삭제한다.")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "id", paramType = "query", dataType = "long", required = true, value = "사용자 아이디", example = "1"),
+        @ApiImplicitParam(name = "name", paramType = "query", dataType = "string", required = false, value = "사용자 이름", example = "spring")
+    })
     @DeleteMapping
     public MemberResponseDto deleteMember(@ApiIgnore MemberRequestVo requestVo) {
 
