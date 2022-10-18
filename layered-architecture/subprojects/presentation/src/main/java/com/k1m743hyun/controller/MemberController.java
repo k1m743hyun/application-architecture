@@ -19,10 +19,10 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @ApiOperation("조회")
+    @ApiOperation(value = "사용자 정보 조회", notes = "사용자의 ID를 통해 사용자의 정보를 조회한다.")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "id", paramType = "query", dataType = "Long", required = false, value = "ID", example = "1"),
-        @ApiImplicitParam(name = "name", paramType = "query", dataType = "string", required = false, value = "Name", example = "spring")
+        @ApiImplicitParam(name = "id", paramType = "query", dataType = "long", required = false, value = "사용자 아이디", example = "1"),
+        @ApiImplicitParam(name = "name", paramType = "query", dataType = "string", required = false, value = "사용자 이름", example = "spring")
     })
     @GetMapping
     public MemberResponseDto getMember(@ApiIgnore MemberRequestVo requestVo) {
@@ -33,7 +33,7 @@ public class MemberController {
     }
 
     @PostMapping
-    public MemberRequestDto saveMember(MemberRequestVo requestVo) {
+    public MemberResponseDto saveMember(@ApiIgnore MemberRequestVo requestVo) {
 
         MemberRequestDto requestDto = requestVo.convert();
 
@@ -41,7 +41,7 @@ public class MemberController {
     }
 
     @PutMapping
-    public MemberRequestDto editMember(MemberRequestVo requestVo) {
+    public MemberResponseDto editMember(@ApiIgnore MemberRequestVo requestVo) {
 
         MemberRequestDto requestDto = requestVo.convert();
 
@@ -49,7 +49,7 @@ public class MemberController {
     }
 
     @DeleteMapping
-    public MemberRequestDto deleteMember(MemberRequestVo requestVo) {
+    public MemberResponseDto deleteMember(@ApiIgnore MemberRequestVo requestVo) {
 
         MemberRequestDto requestDto = requestVo.convert();
 
