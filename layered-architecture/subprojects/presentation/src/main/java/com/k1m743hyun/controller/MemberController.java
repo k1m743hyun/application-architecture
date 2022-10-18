@@ -8,10 +8,12 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/member", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -27,6 +29,8 @@ public class MemberController {
     @GetMapping
     public MemberResponseDto getMember(@ApiIgnore MemberRequestVo requestVo) {
 
+        log.debug("{} - {}", this.getClass().getSimpleName(), "getMember");
+
         MemberRequestDto requestDto = requestVo.convert();
 
         return memberService.getMember(requestDto);
@@ -34,6 +38,8 @@ public class MemberController {
 
     @PostMapping
     public MemberResponseDto saveMember(@ApiIgnore MemberRequestVo requestVo) {
+
+        log.debug("{} - {}", this.getClass().getSimpleName(), "saveMember");
 
         MemberRequestDto requestDto = requestVo.convert();
 
@@ -43,6 +49,8 @@ public class MemberController {
     @PutMapping
     public MemberResponseDto editMember(@ApiIgnore MemberRequestVo requestVo) {
 
+        log.debug("{} - {}", this.getClass().getSimpleName(), "editMember");
+
         MemberRequestDto requestDto = requestVo.convert();
 
         return memberService.editMember(requestDto);
@@ -50,6 +58,8 @@ public class MemberController {
 
     @DeleteMapping
     public MemberResponseDto deleteMember(@ApiIgnore MemberRequestVo requestVo) {
+
+        log.debug("{} - {}", this.getClass().getSimpleName(), "deleteMember");
 
         MemberRequestDto requestDto = requestVo.convert();
 
