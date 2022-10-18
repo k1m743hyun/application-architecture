@@ -13,7 +13,19 @@ public class MemberService {
 
     private final MemberDomainService memberDomainService;
 
-    public MemberResponseDto getDemo(MemberRequestDto memberRequestDto) {
-        return memberDomainService.getDemo(memberRequestDto);
+    public MemberResponseDto getMember(MemberRequestDto requestDto) {
+        return memberDomainService.getMember(requestDto);
+    }
+
+    public MemberResponseDto saveMember(MemberRequestDto requestDto) {
+        return memberDomainService.saveMember(requestDto);
+    }
+
+    public MemberResponseDto editMember(MemberRequestDto requestDto) {
+        return memberDomainService.editMember(requestDto);
+    }
+
+    public MemberResponseDto deleteMember(MemberRequestDto requestDto) {
+        return memberDomainService.deleteMember(requestDto);
     }
 }
