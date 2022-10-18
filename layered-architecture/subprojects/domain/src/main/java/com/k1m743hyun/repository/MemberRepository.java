@@ -1,16 +1,15 @@
 package com.k1m743hyun.repository;
 
 import com.k1m743hyun.data.entity.Member;
-import java.util.List;
 import java.util.Optional;
 
 public interface MemberRepository {
 
-    //Member save(Member member);
+    Optional<Member> getMember(Member member);
 
-    Optional<Member> findById(Long id);
+    Optional<Member> saveMember(Member member);
 
-    Optional<Member> findByName(String name);
+    Optional<Member> editMember(Member member);
 
-    //List<Member> findAll();
+    Optional<Member> deleteMember(Member member);
 }
