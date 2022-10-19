@@ -10,7 +10,7 @@ import org.mapstruct.Mapper;
 @Mapper(config = ObjectMapperConfig.class)
 public interface MemberMapper {
 
-    MemberResponseDto toDto(Optional<Member> request);
-
     Member toEntity(MemberRequestDto requestDto);
+
+    MemberResponseDto toDto(Optional<Member> request);
 }
