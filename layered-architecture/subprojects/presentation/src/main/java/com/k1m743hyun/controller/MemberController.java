@@ -1,6 +1,5 @@
 package com.k1m743hyun.controller;
 
-import com.k1m743hyun.data.dto.request.MemberRequestDto;
 import com.k1m743hyun.data.dto.response.MemberResponseDto;
 import com.k1m743hyun.data.vo.MemberRequestVo;
 import com.k1m743hyun.service.MemberService;
@@ -13,7 +12,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Api(tags = "사용자 관리")
@@ -32,12 +36,7 @@ public class MemberController {
     })
     @GetMapping
     public MemberResponseDto getMember(@ApiIgnore @Validated(MemberRequestValidation.get.class) MemberRequestVo requestVo) {
-
-        log.debug("{} - {}", this.getClass().getSimpleName(), "getMember");
-
-        MemberRequestDto requestDto = requestVo.convert();
-
-        return memberService.getMember(requestDto);
+        return memberService.getMember(requestVo.convert());
     }
 
     @ApiOperation(value = "사용자 정보 등록", notes = "사용자의 ID를 통해 사용자의 정보를 등록한다.")
@@ -47,12 +46,7 @@ public class MemberController {
     })
     @PostMapping
     public MemberResponseDto saveMember(@ApiIgnore @Validated(MemberRequestValidation.save.class) MemberRequestVo requestVo) {
-
-        log.debug("{} - {}", this.getClass().getSimpleName(), "saveMember");
-
-        MemberRequestDto requestDto = requestVo.convert();
-
-        return memberService.saveMember(requestDto);
+        return memberService.saveMember(requestVo.convert());
     }
 
     @ApiOperation(value = "사용자 정보 수정", notes = "사용자의 ID를 통해 사용자의 정보를 수정한다.")
@@ -62,12 +56,7 @@ public class MemberController {
     })
     @PutMapping
     public MemberResponseDto editMember(@ApiIgnore @Validated(MemberRequestValidation.edit.class) MemberRequestVo requestVo) {
-
-        log.debug("{} - {}", this.getClass().getSimpleName(), "editMember");
-
-        MemberRequestDto requestDto = requestVo.convert();
-
-        return memberService.editMember(requestDto);
+        return memberService.editMember(requestVo.convert());
     }
 
     @ApiOperation(value = "사용자 정보 삭제", notes = "사용자의 ID를 통해 사용자의 정보를 삭제한다.")
@@ -77,11 +66,6 @@ public class MemberController {
     })
     @DeleteMapping
     public MemberResponseDto deleteMember(@ApiIgnore @Validated(MemberRequestValidation.delete.class) MemberRequestVo requestVo) {
-
-        log.debug("{} - {}", this.getClass().getSimpleName(), "deleteMember");
-
-        MemberRequestDto requestDto = requestVo.convert();
-
-        return memberService.deleteMember(requestDto);
+        return memberService.deleteMember(requestVo.convert());
     }
 }

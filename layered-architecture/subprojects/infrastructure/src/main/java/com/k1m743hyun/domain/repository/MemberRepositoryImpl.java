@@ -35,14 +35,6 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
 
     /**
-     * 수정
-     */
-//    @Override
-//    public Optional<Member> editMember(Member member) {
-//        return memberJpaRepository.findById(member.getId());
-//    }
-
-    /**
      * 삭제
      */
     @Override

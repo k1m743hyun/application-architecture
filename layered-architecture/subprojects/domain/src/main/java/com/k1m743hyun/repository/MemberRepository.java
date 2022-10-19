@@ -16,11 +16,6 @@ public interface MemberRepository {
     Optional<Member> saveMember(Member member);
 
     /**
-     * 수정
-     */
-    //Optional<Member> editMember(Member member);
-
-    /**
      * 삭제
      */
     Optional<Member> deleteMember(Member member);
