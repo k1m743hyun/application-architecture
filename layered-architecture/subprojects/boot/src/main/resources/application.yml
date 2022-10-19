@@ -23,3 +23,6 @@ spring:
     driver-class-name: "org.h2.Driver"
     url: "jdbc:h2:tcp://localhost/~/application-architecture/layered-architecture/test"
     username: "sa"
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
