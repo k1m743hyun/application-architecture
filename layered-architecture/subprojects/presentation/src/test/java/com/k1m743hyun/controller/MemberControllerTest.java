@@ -33,8 +33,10 @@ class MemberControllerTest {
     @Test
     void getMember() throws Exception {
 
+        // given
         given(memberService.getMember(any(MemberRequestDto.class))).willReturn(MemberResponseDto.builder().build());
 
+        // when
         mockMvc.perform(get(URL_TEMPLATE)
                         .accept(MediaType.APPLICATION_JSON)
                         .queryParam("id", "1")
@@ -42,14 +44,17 @@ class MemberControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print());
 
+        // then
         then(memberService).should().getMember(any(MemberRequestDto.class));
     }
 
     @Test
     void saveMember() throws Exception {
 
+        // given
         given(memberService.saveMember(any(MemberRequestDto.class))).willReturn(MemberResponseDto.builder().build());
 
+        // when
         mockMvc.perform(post(URL_TEMPLATE)
                         .accept(MediaType.APPLICATION_JSON)
                         .queryParam("id", "1")
@@ -58,14 +63,17 @@ class MemberControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print());
 
+        // then
         then(memberService).should().saveMember(any(MemberRequestDto.class));
     }
 
     @Test
     void editMember() throws Exception {
 
+        // given
         given(memberService.editMember(any(MemberRequestDto.class))).willReturn(MemberResponseDto.builder().build());
 
+        // when
         mockMvc.perform(put(URL_TEMPLATE)
                         .accept(MediaType.APPLICATION_JSON)
                         .queryParam("id", "1")
@@ -73,14 +81,17 @@ class MemberControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print());
 
+        // then
         then(memberService).should().editMember(any(MemberRequestDto.class));
     }
 
     @Test
     void deleteMember() throws Exception {
 
+        // given
         given(memberService.deleteMember(any(MemberRequestDto.class))).willReturn(MemberResponseDto.builder().build());
 
+        // when
         mockMvc.perform(delete(URL_TEMPLATE)
                         .accept(MediaType.APPLICATION_JSON)
                         .queryParam("id", "1")
@@ -88,6 +99,7 @@ class MemberControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print());
 
+        // then
         then(memberService).should().deleteMember(any(MemberRequestDto.class));
     }
 }

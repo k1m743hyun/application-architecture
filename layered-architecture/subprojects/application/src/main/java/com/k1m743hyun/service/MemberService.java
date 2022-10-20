@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
 
     private final MemberDomainService memberDomainService;
-
     private final MemberMapper memberMapper;
 
     public MemberResponseDto getMember(MemberRequestDto requestDto) {

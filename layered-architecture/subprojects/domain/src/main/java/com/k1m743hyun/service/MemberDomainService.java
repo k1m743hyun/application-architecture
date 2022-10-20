@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 public class MemberDomainService extends Exception {
 
     private final MemberRepository memberRepository;
-
     private final MemberMapper memberMapper;
 
     /**
