@@ -3,10 +3,11 @@ package com.k1m743hyun.service;
 import com.k1m743hyun.data.dto.request.MemberRequestDto;
 import com.k1m743hyun.data.entity.Member;
 import com.k1m743hyun.repository.MemberRepository;
-import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -70,5 +71,6 @@ class MemberDomainServiceTest {
         Optional<Member> result = memberDomainService.deleteMember(MemberRequestDto.builder().build());
 
         // then
+        then(memberRepository).should().deleteMember(any(Member.class));
     }
 }
