@@ -19,29 +19,23 @@ public class MemberRepositoryImpl implements MemberRepository {
      * 조회
      */
     @Override
-    public Optional<Member> getMember(Member member) {
-        return memberJpaRepository.findById(member.getId());
+    public Optional<Member> getMember(Long id) {
+        return memberJpaRepository.findById(id);
     }
 
     /**
      * 등록
      */
     @Override
-    public Optional<Member> saveMember(Member member) {
-
+    public void saveMember(Member member) {
         memberJpaRepository.save(member);
-
-        return Optional.of(member);
     }
 
     /**
      * 삭제
      */
     @Override
-    public Optional<Member> deleteMember(Member member) {
-
-        memberJpaRepository.deleteById(member.getId());
-
-        return Optional.of(member);
+    public void deleteMember(Long id) {
+        memberJpaRepository.deleteById(id);
     }
 }
