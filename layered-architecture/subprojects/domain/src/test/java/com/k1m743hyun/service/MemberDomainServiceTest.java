@@ -2,6 +2,7 @@ package com.k1m743hyun.service;
 
 import com.k1m743hyun.data.dto.request.MemberRequestDto;
 import com.k1m743hyun.data.entity.Member;
+import com.k1m743hyun.data.mapper.MemberMapper;
 import com.k1m743hyun.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -22,6 +23,9 @@ class MemberDomainServiceTest {
     @Mock
     MemberRepository memberRepository;
 
+    @Mock
+    MemberMapper memberMapper;
+
     @Test
     void getMember() {
 
@@ -39,7 +43,7 @@ class MemberDomainServiceTest {
     void saveMember() {
 
         // given
-        given(memberRepository.saveMember(any(Member.class))).willReturn(Optional.of(Member.builder().build()));
+        //given(memberRepository.saveMember(any(Member.class))).willReturn(Optional.of(Member.builder().build()));
 
         // when
         Optional<Member> result = memberDomainService.saveMember(MemberRequestDto.builder().build());
@@ -65,7 +69,7 @@ class MemberDomainServiceTest {
     void deleteMember() {
 
         // given
-        given(memberRepository.deleteMember(any(Member.class))).willReturn(Optional.of(Member.builder().build()));
+        //given(memberRepository.deleteMember(any(Member.class))).willReturn(Optional.of(Member.builder().build()));
 
         // when
         Optional<Member> result = memberDomainService.deleteMember(MemberRequestDto.builder().build());

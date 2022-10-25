@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class MemberDomainService extends Exception {
+public class MemberDomainService {
 
     private final MemberRepository memberRepository;
     private final MemberMapper memberMapper;
