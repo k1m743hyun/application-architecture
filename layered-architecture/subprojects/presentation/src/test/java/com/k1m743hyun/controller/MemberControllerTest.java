@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(MemberController.class)
 class MemberControllerTest {
 
-    private static final String URL_TEMPLATE = "/member";
+    private static String URL_TEMPLATE = "/member";
 
     @Autowired
     MockMvc mockMvc;
