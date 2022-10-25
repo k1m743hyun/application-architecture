@@ -33,7 +33,7 @@ class MemberDomainServiceTest {
         given(memberRepository.getMember(any(Member.class))).willReturn(Optional.of(Member.builder().build()));
 
         // when
-        Optional<Member> result = memberDomainService.getMember(MemberRequestDto.builder().build());
+        Member result = memberDomainService.getMember(MemberRequestDto.builder().build());
 
         // then
         then(memberRepository).should().getMember(any(Member.class));
@@ -43,10 +43,10 @@ class MemberDomainServiceTest {
     void saveMember() {
 
         // given
-        //given(memberRepository.saveMember(any(Member.class))).willReturn(Optional.of(Member.builder().build()));
+        given(memberRepository.saveMember(any(Member.class))).willReturn(Optional.of(Member.builder().build()));
 
         // when
-        Optional<Member> result = memberDomainService.saveMember(MemberRequestDto.builder().build());
+        Member result = memberDomainService.saveMember(MemberRequestDto.builder().build());
 
         // then
         then(memberRepository).should().saveMember(any(Member.class));
@@ -59,7 +59,7 @@ class MemberDomainServiceTest {
         given(memberRepository.getMember(any(Member.class))).willReturn(Optional.of(Member.builder().build()));
 
         // when
-        Optional<Member> result = memberDomainService.editMember(MemberRequestDto.builder().build());
+        Member result = memberDomainService.editMember(MemberRequestDto.builder().build());
 
         // then
         then(memberRepository).should().getMember(any(Member.class));
@@ -69,10 +69,10 @@ class MemberDomainServiceTest {
     void deleteMember() {
 
         // given
-        //given(memberRepository.deleteMember(any(Member.class))).willReturn(Optional.of(Member.builder().build()));
+        given(memberRepository.deleteMember(any(Member.class))).willReturn(Optional.of(Member.builder().build()));
 
         // when
-        Optional<Member> result = memberDomainService.deleteMember(MemberRequestDto.builder().build());
+        Member result = memberDomainService.deleteMember(MemberRequestDto.builder().build());
 
         // then
         then(memberRepository).should().deleteMember(any(Member.class));

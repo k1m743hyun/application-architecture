@@ -4,7 +4,6 @@ import com.k1m743hyun.data.dto.request.MemberRequestDto;
 import com.k1m743hyun.data.entity.Member;
 import com.k1m743hyun.data.mapper.MemberMapper;
 import com.k1m743hyun.repository.MemberRepository;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -21,25 +20,24 @@ public class MemberDomainService {
     /**
      * 조회
      */
-    public Optional<Member> getMember(MemberRequestDto requestDto) {
-        return memberRepository.getMember(memberMapper.toEntity(requestDto));
+    public Member getMember(MemberRequestDto requestDto) {
+        return memberRepository.getMember(memberMapper.toEntity(requestDto)).orElseThrow();
     }
 
     /**
      * 등록
      */
-    public Optional<Member> saveMember(MemberRequestDto requestDto) {
-        return memberRepository.saveMember(memberMapper.toEntity(requestDto));
+    public Member saveMember(MemberRequestDto requestDto) {
+        return memberRepository.saveMember(memberMapper.toEntity(requestDto)).orElseThrow();
     }
 
     /**
      * 수정
      */
-    public Optional<Member> editMember(MemberRequestDto requestDto) {
+    public Member editMember(MemberRequestDto requestDto) {
 
-        Optional<Member> member = memberRepository.getMember(memberMapper.toEntity(requestDto));
-
-        member.ifPresent(value -> value.update(requestDto.getName()));
+        Member member = memberRepository.getMember(memberMapper.toEntity(requestDto)).orElseThrow();
+        member.update(requestDto.getName());
 
         return member;
     }
@@ -47,7 +45,7 @@ public class MemberDomainService {
     /**
      * 삭제
      */
-    public Optional<Member> deleteMember(MemberRequestDto requestDto) {
-        return memberRepository.deleteMember(memberMapper.toEntity(requestDto));
+    public Member deleteMember(MemberRequestDto requestDto) {
+        return memberRepository.deleteMember(memberMapper.toEntity(requestDto)).orElseThrow();
     }
 }

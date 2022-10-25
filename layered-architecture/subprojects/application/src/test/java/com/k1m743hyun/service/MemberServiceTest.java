@@ -4,7 +4,6 @@ import com.k1m743hyun.data.dto.request.MemberRequestDto;
 import com.k1m743hyun.data.dto.response.MemberResponseDto;
 import com.k1m743hyun.data.entity.Member;
 import com.k1m743hyun.data.mapper.MemberMapper;
-import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,7 +30,7 @@ class MemberServiceTest {
     void getMember() {
 
         // given
-        given(memberDomainService.getMember(any(MemberRequestDto.class))).willReturn(Optional.of(Member.builder().build()));
+        given(memberDomainService.getMember(any(MemberRequestDto.class))).willReturn(Member.builder().build());
 
         // when
         MemberResponseDto result = memberService.getMember(MemberRequestDto.builder().build());
@@ -44,7 +43,7 @@ class MemberServiceTest {
     void saveMember() {
 
         //given
-        given(memberDomainService.saveMember(any(MemberRequestDto.class))).willReturn(Optional.of(Member.builder().build()));
+        given(memberDomainService.saveMember(any(MemberRequestDto.class))).willReturn(Member.builder().build());
 
         // when
         MemberResponseDto result = memberService.saveMember(MemberRequestDto.builder().build());
@@ -57,7 +56,7 @@ class MemberServiceTest {
     void editMember() {
 
         // given
-        given(memberDomainService.editMember(any(MemberRequestDto.class))).willReturn(Optional.of(Member.builder().build()));
+        given(memberDomainService.editMember(any(MemberRequestDto.class))).willReturn(Member.builder().build());
 
         // when
         MemberResponseDto result = memberService.editMember(MemberRequestDto.builder().build());
@@ -70,7 +69,7 @@ class MemberServiceTest {
     void deleteMember() {
 
         // given
-        given(memberDomainService.deleteMember(any(MemberRequestDto.class))).willReturn(Optional.of(Member.builder().build()));
+        given(memberDomainService.deleteMember(any(MemberRequestDto.class))).willReturn(Member.builder().build());
 
         // when
         MemberResponseDto result = memberService.deleteMember(MemberRequestDto.builder().build());
