@@ -20,15 +20,23 @@ public class MemberDomainService {
     /**
      * 조회
      */
-    public Member getMember(MemberRequestDto requestDto) {
-        return memberRepository.getMember(memberMapper.toEntity(requestDto)).orElseThrow();
+    public Member getMember(MemberRequestDto requestDto){
+
+        Member member = memberMapper.toEntity(requestDto);
+
+        return memberRepository.getMember(member.getId()).orElse(member);
     }
 
     /**
      * 등록
      */
     public Member saveMember(MemberRequestDto requestDto) {
-        return memberRepository.saveMember(memberMapper.toEntity(requestDto)).orElseThrow();
+
+        Member member = memberMapper.toEntity(requestDto);
+
+        memberRepository.saveMember(member);
+
+        return member;
     }
 
     /**
@@ -36,16 +44,22 @@ public class MemberDomainService {
      */
     public Member editMember(MemberRequestDto requestDto) {
 
-        Member member = memberRepository.getMember(memberMapper.toEntity(requestDto)).orElseThrow();
-        member.update(requestDto.getName());
+        Member member = memberMapper.toEntity(requestDto);
+        Member new_member = memberRepository.getMember(member.getId()).orElse(member);
+        new_member.update(requestDto.getName());
 
-        return member;
+        return new_member;
     }
 
     /**
      * 삭제
      */
     public Member deleteMember(MemberRequestDto requestDto) {
-        return memberRepository.deleteMember(memberMapper.toEntity(requestDto)).orElseThrow();
+
+        Member member = memberMapper.toEntity(requestDto);
+
+        memberRepository.deleteMember(member.getId());
+
+        return member;
     }
 }
