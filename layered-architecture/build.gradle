@@ -76,6 +76,7 @@ project(':presentation') {
 	dependencies {
 		implementation project(':application')
 		implementation project(':domain')
+
 		testImplementation project(':boot')
 	}
 	bootJar { enabled = false }
@@ -84,6 +85,7 @@ project(':presentation') {
 project(':application') {
 	dependencies {
 		implementation project(':domain')
+		implementation project(':infrastructure')
 	}
 	bootJar { enabled = false }
 }
@@ -97,8 +99,8 @@ project(':domain') {
 
 project(':infrastructure') {
 	dependencies {
-		implementation project(':presentation')
 		implementation project(':domain')
+
 		testImplementation project(':boot')
 	}
 	bootJar { enabled = false }
@@ -108,17 +110,4 @@ task printVersion {
 	doLast {
 		println project(':boot').version
 	}
-}
-
-clean {
-	delete file('subprojects/boot/out')
-	delete file('subprojects/presentation/out')
-	delete file('subprojects/application/out')
-	delete file('subprojects/domain/out')
-	delete file('subprojects/infrastructure/out')
-	delete file('subprojects/boot/src/main/generated')
-	delete file('subprojects/presentation/src/main/generated')
-	delete file('subprojects/application/src/main/generated')
-	delete file('subprojects/domain/src/main/generated')
-	delete file('subprojects/infrastructure/src/main/generated')
 }
