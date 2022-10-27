@@ -18,14 +18,14 @@ public class MemberQuerydslRepository {
     }
 
     public Member saveMember() {
-
+        return queryFactory;
     }
 
     public Member editMember() {
-
+        return queryFactory.update(member).set();
     }
 
     public Member deleteMember() {
-
+        return queryFactory.delete(member).where();
     }
 }
