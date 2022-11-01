@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MemberRequestVo {
 
-    @NotNull(groups = {MemberRequestValidation.getMemberByUserId.class, MemberRequestValidation.getMemberByUserName.class, MemberRequestValidation.saveMember.class, MemberRequestValidation.editMember.class, MemberRequestValidation.deleteMember.class})
+    @NotNull(groups = {MemberRequestValidation.getMemberByUserId.class, MemberRequestValidation.getMemberByUserName.class, MemberRequestValidation.editMember.class, MemberRequestValidation.deleteMember.class})
     private Long userId;
 
     @NotNull(groups = MemberRequestValidation.saveMember.class)

@@ -18,14 +18,14 @@ import static org.mockito.BDDMockito.then;
 @ExtendWith(MockitoExtension.class)
 class MemberServiceTest {
 
-    @InjectMocks
-    MemberService memberService;
-
     @Mock
     MemberDomainService memberDomainService;
 
     @Mock
     MemberMapper memberMapper;
+
+    @InjectMocks
+    MemberService memberService;
 
     @Test
     void getMemberByUserId() {

@@ -30,10 +30,10 @@ class MemberControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-    ObjectMapper objectMapper = new ObjectMapper();
-
     @MockBean
     MemberService memberService;
+
+    ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
     void getMemberByUserId() throws Exception {

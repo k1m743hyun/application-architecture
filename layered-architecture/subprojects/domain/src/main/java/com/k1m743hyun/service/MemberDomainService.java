@@ -29,6 +29,7 @@ public class MemberDomainService {
     }
 
     public Member getMemberByUserName(MemberRequestDto requestDto) {
+
         Member member = memberMapper.toEntity(requestDto);
 
         return memberRepository.getMemberByUserName(member.getUserName()).orElse(member);
@@ -56,7 +57,8 @@ public class MemberDomainService {
     public Member editMember(MemberRequestDto requestDto) {
 
         Member member = memberMapper.toEntity(requestDto);
-        Member new_member = memberRepository.getMemberByUserId(member.getUserId()).orElse(member);
+        Member new_member = memberRepository.getMemberByUserId(member.getUserId()).orElse(Member.builder().build());
+
         new_member.update(requestDto.getUserName());
 
         return new_member;
@@ -68,9 +70,10 @@ public class MemberDomainService {
     public Member deleteMember(MemberRequestDto requestDto) {
 
         Member member = memberMapper.toEntity(requestDto);
+        Member old_member = memberRepository.getMemberByUserId(member.getUserId()).orElse(Member.builder().build());
 
         memberRepository.deleteMember(member.getUserId());
 
-        return member;
+        return old_member;
     }
 }

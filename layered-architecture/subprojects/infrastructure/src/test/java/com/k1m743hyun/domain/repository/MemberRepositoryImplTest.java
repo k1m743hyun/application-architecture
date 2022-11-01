@@ -18,11 +18,11 @@ import static org.mockito.BDDMockito.then;
 @ExtendWith(MockitoExtension.class)
 class MemberRepositoryImplTest {
 
-    @InjectMocks
-    MemberRepositoryImpl memberRepository;
-
     @Mock
     MemberJpaRepository memberJpaRepository;
+
+    @InjectMocks
+    MemberRepositoryImpl memberRepository;
 
     @Test
     void getMemberByUserId() {
