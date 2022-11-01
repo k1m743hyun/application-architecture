@@ -6,22 +6,24 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Builder
 public class MemberRequestVo {
 
-    @NotNull(groups = {MemberRequestValidation.get.class, MemberRequestValidation.save.class, MemberRequestValidation.edit.class, MemberRequestValidation.delete.class})
-    private Long id;
+    @NotNull(groups = {MemberRequestValidation.getMemberByUserId.class, MemberRequestValidation.getMemberByUserName.class, MemberRequestValidation.saveMember.class, MemberRequestValidation.editMember.class, MemberRequestValidation.deleteMember.class})
+    private Long userId;
 
-    @NotNull(groups = MemberRequestValidation.save.class)
-    private String name;
+    @NotNull(groups = MemberRequestValidation.saveMember.class)
+    private String userName;
 
     public MemberRequestDto convert() {
         return MemberRequestDto.builder()
-            .id(id)
-            .name(name)
+            .userId(userId)
+            .userName(userName)
             .build();
     }
 }

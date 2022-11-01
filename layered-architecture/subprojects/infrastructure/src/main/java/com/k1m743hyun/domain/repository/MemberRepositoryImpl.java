@@ -3,6 +3,7 @@ package com.k1m743hyun.domain.repository;
 import com.k1m743hyun.data.entity.Member;
 import com.k1m743hyun.provider.jpa.MemberJpaRepository;
 import com.k1m743hyun.repository.MemberRepository;
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,8 +20,18 @@ public class MemberRepositoryImpl implements MemberRepository {
      * 조회
      */
     @Override
-    public Optional<Member> getMember(Long id) {
-        return memberJpaRepository.findById(id);
+    public Optional<Member> getMemberByUserId(Long userId) {
+        return memberJpaRepository.findById(userId);
+    }
+
+    @Override
+    public Optional<Member> getMemberByUserName(String userName) {
+        return memberJpaRepository.findByUserName(userName);
+    }
+
+    @Override
+    public List<Member> getAllMembers() {
+        return memberJpaRepository.findAll();
     }
 
     /**

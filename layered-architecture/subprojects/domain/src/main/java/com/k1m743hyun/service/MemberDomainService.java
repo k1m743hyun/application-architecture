@@ -4,6 +4,7 @@ import com.k1m743hyun.data.dto.request.MemberRequestDto;
 import com.k1m743hyun.data.entity.Member;
 import com.k1m743hyun.data.mapper.MemberMapper;
 import com.k1m743hyun.repository.MemberRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -20,11 +21,21 @@ public class MemberDomainService {
     /**
      * 조회
      */
-    public Member getMember(MemberRequestDto requestDto){
+    public Member getMemberByUserId(MemberRequestDto requestDto){
 
         Member member = memberMapper.toEntity(requestDto);
 
-        return memberRepository.getMember(member.getId()).orElse(member);
+        return memberRepository.getMemberByUserId(member.getUserId()).orElse(member);
+    }
+
+    public Member getMemberByUserName(MemberRequestDto requestDto) {
+        Member member = memberMapper.toEntity(requestDto);
+
+        return memberRepository.getMemberByUserName(member.getUserName()).orElse(member);
+    }
+
+    public List<Member> getAllMembers() {
+        return memberRepository.getAllMembers();
     }
 
     /**
@@ -45,8 +56,8 @@ public class MemberDomainService {
     public Member editMember(MemberRequestDto requestDto) {
 
         Member member = memberMapper.toEntity(requestDto);
-        Member new_member = memberRepository.getMember(member.getId()).orElse(member);
-        new_member.update(requestDto.getName());
+        Member new_member = memberRepository.getMemberByUserId(member.getUserId()).orElse(member);
+        new_member.update(requestDto.getUserName());
 
         return new_member;
     }
@@ -58,7 +69,7 @@ public class MemberDomainService {
 
         Member member = memberMapper.toEntity(requestDto);
 
-        memberRepository.deleteMember(member.getId());
+        memberRepository.deleteMember(member.getUserId());
 
         return member;
     }

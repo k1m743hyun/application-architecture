@@ -2,11 +2,13 @@ package com.k1m743hyun.validation.marker;
 
 public class MemberRequestValidation {
 
-    public interface get {}
+    public interface getMemberByUserId {}
 
-    public interface save {}
+    public interface getMemberByUserName {}
 
-    public interface edit {}
+    public interface saveMember {}
 
-    public interface delete{}
+    public interface editMember {}
+
+    public interface deleteMember{}
 }

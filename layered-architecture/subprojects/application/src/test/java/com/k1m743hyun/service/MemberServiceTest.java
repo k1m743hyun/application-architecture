@@ -4,6 +4,7 @@ import com.k1m743hyun.data.dto.request.MemberRequestDto;
 import com.k1m743hyun.data.dto.response.MemberResponseDto;
 import com.k1m743hyun.data.entity.Member;
 import com.k1m743hyun.data.mapper.MemberMapper;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,22 +28,48 @@ class MemberServiceTest {
     MemberMapper memberMapper;
 
     @Test
-    void getMember() {
+    void getMemberByUserId() {
 
         // given
-        given(memberDomainService.getMember(any(MemberRequestDto.class))).willReturn(Member.builder().build());
+        given(memberDomainService.getMemberByUserId(any(MemberRequestDto.class))).willReturn(Member.builder().build());
 
         // when
-        MemberResponseDto result = memberService.getMember(MemberRequestDto.builder().build());
+        MemberResponseDto result = memberService.getMemberByUserId(MemberRequestDto.builder().build());
 
         // then
-        then(memberDomainService).should().getMember(any(MemberRequestDto.class));
+        then(memberDomainService).should().getMemberByUserId(any(MemberRequestDto.class));
+    }
+
+    @Test
+    void getMemberByUserName() {
+
+        // given
+        given(memberDomainService.getMemberByUserName(any(MemberRequestDto.class))).willReturn(Member.builder().build());
+
+        // when
+        MemberResponseDto result = memberService.getMemberByUserName(MemberRequestDto.builder().build());
+
+        // then
+        then(memberDomainService).should().getMemberByUserName(any(MemberRequestDto.class));
+    }
+
+    @Test
+    void getAllMembers() {
+
+        // given
+        given(memberDomainService.getAllMembers()).willReturn(List.of());
+
+        // when
+        List<MemberResponseDto> result = memberService.getAllMembers();
+
+        // then
+        then(memberDomainService).should().getAllMembers();
     }
 
     @Test
     void saveMember() {
 
-        //given
+        // given
         given(memberDomainService.saveMember(any(MemberRequestDto.class))).willReturn(Member.builder().build());
 
         // when

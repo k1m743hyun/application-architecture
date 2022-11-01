@@ -7,6 +7,6 @@ import lombok.Getter;
 @Builder
 public class MemberRequestDto {
 
-    private Long id;
-    private String name;
+    private Long userId;
+    private String userName;
 }

@@ -1,8 +1,11 @@
 package com.k1m743hyun.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.k1m743hyun.data.dto.request.MemberRequestDto;
 import com.k1m743hyun.data.dto.response.MemberResponseDto;
+import com.k1m743hyun.data.vo.MemberRequestVo;
 import com.k1m743hyun.service.MemberService;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,41 +30,88 @@ class MemberControllerTest {
     @Autowired
     MockMvc mockMvc;
 
+    ObjectMapper objectMapper = new ObjectMapper();
+
     @MockBean
     MemberService memberService;
 
     @Test
-    void getMember() throws Exception {
+    void getMemberByUserId() throws Exception {
+
+        Long userId = 1L;
 
         // given
-        given(memberService.getMember(any(MemberRequestDto.class))).willReturn(MemberResponseDto.builder().build());
+        given(memberService.getMemberByUserId(any(MemberRequestDto.class))).willReturn(MemberResponseDto.builder().build());
 
         // when
-        mockMvc.perform(get(URL_TEMPLATE)
-                        .accept(MediaType.APPLICATION_JSON)
-                        .queryParam("id", "1")
-                )
-                .andExpect(status().isOk())
-                .andDo(print());
+        mockMvc.perform(get(URL_TEMPLATE + "/userId/" + userId)
+                .accept(MediaType.APPLICATION_JSON)
+            )
+            .andExpect(status().isOk())
+            .andDo(print());
 
         // then
-        then(memberService).should().getMember(any(MemberRequestDto.class));
+        then(memberService).should().getMemberByUserId(any(MemberRequestDto.class));
+    }
+
+    @Test
+    void getMemberByUserName() throws Exception {
+
+        String userName = "spring";
+
+        // given
+        given(memberService.getMemberByUserName(any(MemberRequestDto.class))).willReturn(MemberResponseDto.builder().build());
+
+        // when
+        mockMvc.perform(get(URL_TEMPLATE + "/userName/" + userName)
+                .accept(MediaType.APPLICATION_JSON)
+            )
+            .andExpect(status().isOk())
+            .andDo(print());
+
+        // then
+        then(memberService).should().getMemberByUserName(any(MemberRequestDto.class));
+    }
+
+    @Test
+    void getAllMembers() throws Exception {
+
+        // given
+        given(memberService.getAllMembers()).willReturn(List.of());
+
+        // when
+        mockMvc.perform(get(URL_TEMPLATE + "/all")
+                .accept(MediaType.APPLICATION_JSON)
+            )
+            .andExpect(status().isOk())
+            .andDo(print());
+
+        // then
+        then(memberService).should().getAllMembers();
     }
 
     @Test
     void saveMember() throws Exception {
 
+        Long userId = 1L;
+        String userName = "spring";
+
+        MemberRequestVo requestVo = MemberRequestVo.builder()
+            .userId(userId)
+            .userName(userName)
+            .build();
+
         // given
         given(memberService.saveMember(any(MemberRequestDto.class))).willReturn(MemberResponseDto.builder().build());
 
         // when
-        mockMvc.perform(post(URL_TEMPLATE)
-                        .accept(MediaType.APPLICATION_JSON)
-                        .queryParam("id", "1")
-                        .queryParam("name", "spring")
-                )
-                .andExpect(status().isOk())
-                .andDo(print());
+        mockMvc.perform(post(URL_TEMPLATE + "/save")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsBytes(requestVo))
+                .accept(MediaType.APPLICATION_JSON)
+            )
+            .andExpect(status().isOk())
+            .andDo(print());
 
         // then
         then(memberService).should().saveMember(any(MemberRequestDto.class));
@@ -70,16 +120,25 @@ class MemberControllerTest {
     @Test
     void editMember() throws Exception {
 
+        Long userId = 1L;
+        String userName = "spring";
+
+        MemberRequestVo requestVo = MemberRequestVo.builder()
+            .userId(userId)
+            .userName(userName)
+            .build();
+
         // given
         given(memberService.editMember(any(MemberRequestDto.class))).willReturn(MemberResponseDto.builder().build());
 
         // when
-        mockMvc.perform(put(URL_TEMPLATE)
-                        .accept(MediaType.APPLICATION_JSON)
-                        .queryParam("id", "1")
-                )
-                .andExpect(status().isOk())
-                .andDo(print());
+        mockMvc.perform(put(URL_TEMPLATE + "/edit")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsBytes(requestVo))
+                .accept(MediaType.APPLICATION_JSON)
+            )
+            .andExpect(status().isOk())
+            .andDo(print());
 
         // then
         then(memberService).should().editMember(any(MemberRequestDto.class));
@@ -88,16 +147,23 @@ class MemberControllerTest {
     @Test
     void deleteMember() throws Exception {
 
+        Long userId = 1L;
+
+        MemberRequestVo requestVo = MemberRequestVo.builder()
+            .userId(userId)
+            .build();
+
         // given
         given(memberService.deleteMember(any(MemberRequestDto.class))).willReturn(MemberResponseDto.builder().build());
 
         // when
-        mockMvc.perform(delete(URL_TEMPLATE)
-                        .accept(MediaType.APPLICATION_JSON)
-                        .queryParam("id", "1")
-                )
-                .andExpect(status().isOk())
-                .andDo(print());
+        mockMvc.perform(delete(URL_TEMPLATE + "/delete")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsBytes(requestVo))
+                .accept(MediaType.APPLICATION_JSON)
+            )
+            .andExpect(status().isOk())
+            .andDo(print());
 
         // then
         then(memberService).should().deleteMember(any(MemberRequestDto.class));

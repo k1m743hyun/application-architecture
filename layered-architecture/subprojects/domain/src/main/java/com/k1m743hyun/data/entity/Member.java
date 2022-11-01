@@ -1,14 +1,16 @@
 package com.k1m743hyun.data.entity;
 
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Getter
 @Builder
@@ -19,15 +21,16 @@ import javax.persistence.Table;
 public class Member {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USERID")
+    private Long userId;
 
-    //@Column(name = "name")
-    private String name;
+    @Column(name = "USERNAME")
+    private String userName;
 
-    public Member update(String name) {
+    public Member update(String userName) {
 
-        this.name = name;
+        this.userName = userName;
 
         return this;
     }

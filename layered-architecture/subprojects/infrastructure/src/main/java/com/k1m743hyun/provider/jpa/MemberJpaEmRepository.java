@@ -11,15 +11,15 @@ public class MemberJpaEmRepository {
 
     private EntityManager em;
 
-    public Member getMember(Long id) {
+    public Member getMember(Long userId) {
 
         String jpql = "" +
                 "SELECT *       \n" +
                 "FROM MEMBER    \n" +
-                "WHERE id = :id \n";
+                "WHERE id = :userId \n";
 
         Query query = em.createNativeQuery(jpql, Member.class)
-                .setParameter("id", id);
+                .setParameter("userId", userId);
 
         return (Member) query.getSingleResult();
     }
@@ -44,13 +44,13 @@ public class MemberJpaEmRepository {
         return member;
     }
 
-    public Member deleteMember(Long id) {
+    public Member deleteMember(Long userId) {
 
         String jpql = "";
 
         Query query = em.createNativeQuery(jpql, Member.class);
         query.executeUpdate();
 
-        return Member.builder().id(id).build();
+        return Member.builder().userId(userId).build();
     }
 }

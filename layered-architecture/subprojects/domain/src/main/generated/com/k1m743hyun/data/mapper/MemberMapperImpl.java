@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-27T23:11:20+0900",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.15.1 (Oracle Corporation)"
+    date = "2022-11-01T13:21:51+0900",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.12 (Oracle Corporation)"
 )
 @Component
 public class MemberMapperImpl implements MemberMapper {
@@ -24,8 +24,8 @@ public class MemberMapperImpl implements MemberMapper {
 
         MemberBuilder member = Member.builder();
 
-        member.id( requestDto.getId() );
-        member.name( requestDto.getName() );
+        member.userId( requestDto.getUserId() );
+        member.userName( requestDto.getUserName() );
 
         return member.build();
     }
@@ -38,8 +38,8 @@ public class MemberMapperImpl implements MemberMapper {
 
         MemberResponseDtoBuilder memberResponseDto = MemberResponseDto.builder();
 
-        memberResponseDto.id( request.getId() );
-        memberResponseDto.name( request.getName() );
+        memberResponseDto.userId( request.getUserId() );
+        memberResponseDto.userName( request.getUserName() );
 
         return memberResponseDto.build();
     }
