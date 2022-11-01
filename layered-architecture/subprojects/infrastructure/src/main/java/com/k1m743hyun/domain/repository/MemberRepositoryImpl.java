@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+
 @Slf4j
 @RequiredArgsConstructor
 @Repository
@@ -17,7 +18,7 @@ public class MemberRepositoryImpl implements MemberRepository {
     private final MemberJpaRepository memberJpaRepository;
 
     /**
-     * 조회
+     * 상세 조회
      */
     @Override
     public Optional<Member> getMemberByUserId(Long userId) {
@@ -29,6 +30,9 @@ public class MemberRepositoryImpl implements MemberRepository {
         return memberJpaRepository.findByUserName(userName);
     }
 
+    /**
+     * 리스트 조회
+     */
     @Override
     public List<Member> getAllMembers() {
         return memberJpaRepository.findAll();
@@ -46,7 +50,7 @@ public class MemberRepositoryImpl implements MemberRepository {
      * 삭제
      */
     @Override
-    public void deleteMember(Long id) {
-        memberJpaRepository.deleteById(id);
+    public void deleteMember(Long userId) {
+        memberJpaRepository.deleteById(userId);
     }
 }

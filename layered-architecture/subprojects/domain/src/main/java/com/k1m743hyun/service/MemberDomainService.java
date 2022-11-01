@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 
 @Slf4j
 @RequiredArgsConstructor
@@ -19,7 +21,7 @@ public class MemberDomainService {
     private final MemberMapper memberMapper;
 
     /**
-     * 조회
+     * 상세 조회
      */
     public Member getMemberByUserId(MemberRequestDto requestDto){
 
@@ -35,6 +37,9 @@ public class MemberDomainService {
         return memberRepository.getMemberByUserName(member.getUserName()).orElse(member);
     }
 
+    /**
+     * 리스트 조회
+     */
     public List<Member> getAllMembers() {
         return memberRepository.getAllMembers();
     }
