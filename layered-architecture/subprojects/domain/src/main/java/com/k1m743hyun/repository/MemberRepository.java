@@ -14,7 +14,7 @@ public interface MemberRepository {
     /**
      * 사용자 조회
      */
-    Optional<Member> getMemberByUserName(String userName);
+    List<Member> getMemberByUserName(String userName);
 
     /**
      * 사용자 전체 조회
@@ -29,5 +29,5 @@ public interface MemberRepository {
     /**
      * 삭제
      */
-    void deleteMember(Long id);
+    void deleteMember(Long userId);
 }

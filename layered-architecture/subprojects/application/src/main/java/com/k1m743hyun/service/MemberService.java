@@ -24,8 +24,11 @@ public class MemberService {
         return memberMapper.toDto(memberDomainService.getMemberByUserId(requestDto));
     }
 
-    public MemberResponseDto getMemberByUserName(MemberRequestDto requestDto) {
-        return memberMapper.toDto(memberDomainService.getMemberByUserName(requestDto));
+    public List<MemberResponseDto> getMemberByUserName(MemberRequestDto requestDto) {
+        return memberDomainService.getMemberByUserName(requestDto)
+            .stream()
+            .map(memberMapper::toDto)
+            .collect(Collectors.toList());
     }
 
     public List<MemberResponseDto> getAllMembers() {

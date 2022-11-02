@@ -26,7 +26,7 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
 
     @Override
-    public Optional<Member> getMemberByUserName(String userName) {
+    public List<Member> getMemberByUserName(String userName) {
         return memberJpaRepository.findByUserName(userName);
     }
 

@@ -5,11 +5,10 @@ import com.k1m743hyun.data.entity.Member;
 import com.k1m743hyun.data.mapper.MemberMapper;
 import com.k1m743hyun.repository.MemberRepository;
 import java.util.List;
+import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 
 @Slf4j
@@ -24,17 +23,12 @@ public class MemberDomainService {
      * 상세 조회
      */
     public Member getMemberByUserId(MemberRequestDto requestDto){
-
-        Member member = memberMapper.toEntity(requestDto);
-
-        return memberRepository.getMemberByUserId(member.getUserId()).orElse(member);
+        return memberRepository.getMemberByUserId(requestDto.getUserId()).orElseThrow(() -> new NoSuchElementException());
     }
 
-    public Member getMemberByUserName(MemberRequestDto requestDto) {
+    public List<Member> getMemberByUserName(MemberRequestDto requestDto) {
 
-        Member member = memberMapper.toEntity(requestDto);
-
-        return memberRepository.getMemberByUserName(member.getUserName()).orElse(member);
+        return memberRepository.getMemberByUserName(requestDto.getUserName());
     }
 
     /**
@@ -61,12 +55,11 @@ public class MemberDomainService {
      */
     public Member editMember(MemberRequestDto requestDto) {
 
-        Member member = memberMapper.toEntity(requestDto);
-        Member new_member = memberRepository.getMemberByUserId(member.getUserId()).orElse(Member.builder().build());
+        Member member = memberRepository.getMemberByUserId(requestDto.getUserId()).orElseThrow(() -> new NoSuchElementException());
 
-        new_member.update(requestDto.getUserName());
+        member.update(requestDto.getUserName());
 
-        return new_member;
+        return member;
     }
 
     /**
@@ -74,11 +67,10 @@ public class MemberDomainService {
      */
     public Member deleteMember(MemberRequestDto requestDto) {
 
-        Member member = memberMapper.toEntity(requestDto);
-        Member old_member = memberRepository.getMemberByUserId(member.getUserId()).orElse(Member.builder().build());
+        Member member = memberRepository.getMemberByUserId(requestDto.getUserId()).orElse(Member.builder().build());
 
-        memberRepository.deleteMember(member.getUserId());
+        memberRepository.deleteMember(requestDto.getUserId());
 
-        return old_member;
+        return member;
     }
 }

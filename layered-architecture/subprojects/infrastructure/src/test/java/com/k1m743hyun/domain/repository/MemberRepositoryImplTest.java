@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
@@ -28,32 +29,37 @@ class MemberRepositoryImplTest {
     void getMemberByUserId() {
 
         // given
-        given(memberJpaRepository.findById(anyLong())).willReturn(Optional.of(Member.builder().build()));
+        Long userId = anyLong();
+
+        given(memberJpaRepository.findById(userId)).willReturn(Optional.of(Member.builder().build()));
 
         // when
-        Optional<Member> result = memberRepository.getMemberByUserId(anyLong());
+        Optional<Member> result = memberRepository.getMemberByUserId(userId);
 
         // then
-        then(memberJpaRepository).should().findById(anyLong());
+        then(memberJpaRepository).should().findById(userId);
     }
 
     @Test
     void getMemberByUserName() {
 
         // given
-        given(memberJpaRepository.findByUserName(anyString())).willReturn(Optional.of(Member.builder().build()));
+        String userName = anyString();
+
+        given(memberJpaRepository.findByUserName(userName)).willReturn(List.of(Member.builder().build()));
 
         // when
-        Optional<Member> result = memberRepository.getMemberByUserName(anyString());
+        List<Member> result = memberRepository.getMemberByUserName(userName);
 
         // then
-        then(memberJpaRepository).should().findByUserName(anyString());
+        then(memberJpaRepository).should().findByUserName(userName);
     }
 
     @Test
     void getAllMembers() {
 
         // given
+        given(memberJpaRepository.findAll()).willReturn(List.of(Member.builder().build()));
 
         // when
         List<Member> result = memberRepository.getAllMembers();
@@ -66,13 +72,7 @@ class MemberRepositoryImplTest {
     void saveMember() {
 
         // given
-        Long userId = 1L;
-        String userName = "spring";
-
-        Member member = Member.builder()
-                    .userId(userId)
-                    .userName(userName)
-                    .build();
+        Member member = any(Member.class);
 
         // when
         memberRepository.saveMember(member);
@@ -85,11 +85,12 @@ class MemberRepositoryImplTest {
     void deleteMember() {
 
         // given
+        Long userId = anyLong();
 
         // when
-        memberRepository.deleteMember(anyLong());
+        memberRepository.deleteMember(userId);
 
         // then
-        then(memberJpaRepository).should().deleteById(anyLong());
+        then(memberJpaRepository).should().deleteById(userId);
     }
 }

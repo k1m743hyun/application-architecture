@@ -5,14 +5,13 @@ import com.k1m743hyun.data.entity.Member;
 import com.k1m743hyun.data.mapper.MemberMapper;
 import com.k1m743hyun.repository.MemberRepository;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
@@ -35,26 +34,30 @@ class MemberDomainServiceTest {
     void getMemberByUserId() {
 
         // given
-        given(memberRepository.getMemberByUserId(anyLong()));
+        Long userId = anyLong();
+
+        given(memberRepository.getMemberByUserId(userId)).willReturn(Optional.of(Member.builder().build()));
 
         // when
-        memberDomainService.getMemberByUserId(any(MemberRequestDto.class));
+        memberDomainService.getMemberByUserId(MemberRequestDto.builder().userId(userId).build());
 
         // then
-        then(memberRepository).should().getMemberByUserId(anyLong());
+        then(memberRepository).should().getMemberByUserId(userId);
     }
 
     @Test
     void getMemberByUserName() {
 
         // given
-        given(memberRepository.getMemberByUserName(anyString()));
+        String userName = anyString();
+
+        given(memberRepository.getMemberByUserName(userName)).willReturn(List.of(Member.builder().build()));
 
         // when
-        Member result = memberDomainService.getMemberByUserName(any(MemberRequestDto.class));
+        List<Member> result = memberDomainService.getMemberByUserName(MemberRequestDto.builder().userName(userName).build());
 
         // then
-        then(memberRepository).should().getMemberByUserName(anyString());
+        then(memberRepository).should().getMemberByUserName(userName);
     }
 
     @Test
@@ -73,41 +76,50 @@ class MemberDomainServiceTest {
     void saveMember() {
 
         // given
+        String userName = anyString();
+
+        MemberRequestDto requestDto = MemberRequestDto.builder()
+            .userName(userName)
+            .build();
+
+        Member member = memberMapper.toEntity(requestDto);
 
         // when
-        Member result = memberDomainService.saveMember(any(MemberRequestDto.class));
+        Member result = memberDomainService.saveMember(requestDto);
 
         // then
-        assertThat(result).isEqualTo(memberMapper.toEntity(MemberRequestDto.builder().build()));
+        then(memberRepository).should().saveMember(member);
     }
 
     @Test
     void editMember() {
 
         // given
-        given(memberRepository.getMemberByUserId(anyLong()));
+        Long userId = anyLong();
+
+        MemberRequestDto requestDto = MemberRequestDto.builder()
+            .userId(userId)
+            .build();
+
+        given(memberRepository.getMemberByUserId(userId)).willReturn(Optional.of(Member.builder().build()));
 
         // when
-        Member result = memberDomainService.editMember(any(MemberRequestDto.class));
+        Member result = memberDomainService.editMember(requestDto);
 
         // then
-        then(memberRepository).should().getMemberByUserId(anyLong());
-        //assertThat(result).isEqualTo(memberMapper.toEntity(MemberRequestDto.builder().build()));
+        then(memberRepository).should().getMemberByUserId(userId);
     }
 
     @Test
     void deleteMember() {
 
         // given
-        MemberRequestDto requestDto = MemberRequestDto.builder()
-                    .userId(anyLong())
-                    .build();
+        Long userId = anyLong();
 
         // when
-        Member result = memberDomainService.deleteMember(requestDto);
+        memberDomainService.deleteMember(MemberRequestDto.builder().userId(userId).build());
 
         // then
-        then(memberRepository).should().deleteMember(anyLong());
-        //assertThat(result).isEqualTo(memberMapper.toEntity(requestDto));
+        then(memberRepository).should().deleteMember(userId);
     }
 }

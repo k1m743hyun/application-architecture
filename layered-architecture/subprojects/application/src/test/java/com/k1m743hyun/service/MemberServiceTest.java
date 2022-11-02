@@ -44,10 +44,10 @@ class MemberServiceTest {
     void getMemberByUserName() {
 
         // given
-        given(memberDomainService.getMemberByUserName(any(MemberRequestDto.class))).willReturn(Member.builder().build());
+        given(memberDomainService.getMemberByUserName(any(MemberRequestDto.class))).willReturn(List.of(Member.builder().build()));
 
         // when
-        MemberResponseDto result = memberService.getMemberByUserName(MemberRequestDto.builder().build());
+        List<MemberResponseDto> result = memberService.getMemberByUserName(MemberRequestDto.builder().build());
 
         // then
         then(memberDomainService).should().getMemberByUserName(any(MemberRequestDto.class));
@@ -99,7 +99,7 @@ class MemberServiceTest {
         given(memberDomainService.deleteMember(any(MemberRequestDto.class))).willReturn(Member.builder().build());
 
         // when
-        MemberResponseDto result = memberService.deleteMember(MemberRequestDto.builder().build());
+        memberService.deleteMember(MemberRequestDto.builder().build());
 
         // then
         then(memberDomainService).should().deleteMember(any(MemberRequestDto.class));

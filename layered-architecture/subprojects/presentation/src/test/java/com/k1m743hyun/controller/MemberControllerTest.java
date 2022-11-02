@@ -65,7 +65,7 @@ class MemberControllerTest {
         // given
         String userName = "spring";
 
-        given(memberService.getMemberByUserName(any(MemberRequestDto.class))).willReturn(MemberResponseDto.builder().build());
+        given(memberService.getMemberByUserName(any(MemberRequestDto.class))).willReturn(List.of(MemberResponseDto.builder().build()));
 
         // when
         mockMvc.perform(get(URL_TEMPLATE + "/userName/" + userName)
