@@ -57,7 +57,7 @@ class MemberServiceTest {
     void getAllMembers() {
 
         // given
-        given(memberDomainService.getAllMembers()).willReturn(List.of());
+        given(memberDomainService.getAllMembers()).willReturn(List.of(Member.builder().build()));
 
         // when
         List<MemberResponseDto> result = memberService.getAllMembers();

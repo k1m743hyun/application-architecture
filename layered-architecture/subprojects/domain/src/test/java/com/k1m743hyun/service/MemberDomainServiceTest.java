@@ -98,11 +98,10 @@ class MemberDomainServiceTest {
     @Test
     void deleteMember() {
 
+        // given
         MemberRequestDto requestDto = MemberRequestDto.builder()
                     .userId(anyLong())
                     .build();
-
-        // given
 
         // when
         Member result = memberDomainService.deleteMember(requestDto);

@@ -65,6 +65,7 @@ class MemberRepositoryImplTest {
     @Test
     void saveMember() {
 
+        // given
         Long userId = 1L;
         String userName = "spring";
 
@@ -72,8 +73,6 @@ class MemberRepositoryImplTest {
                     .userId(userId)
                     .userName(userName)
                     .build();
-
-        // given
 
         // when
         memberRepository.saveMember(member);
