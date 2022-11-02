@@ -7,27 +7,27 @@ import java.util.Optional;
 public interface MemberRepository {
 
     /**
-     * 사용자 조회
+     * 사용자 아아디로 사용자 정보 조회
      */
     Optional<Member> getMemberByUserId(Long userId);
 
     /**
-     * 사용자 조회
+     * 사용자 이름으로 사용자 정보 조회
      */
     List<Member> getMemberByUserName(String userName);
 
     /**
-     * 사용자 전체 조회
+     * 사용자 정보 전체 조회
      */
     List<Member> getAllMembers();
 
     /**
-     * 등록
+     * 사용자 정보 등록
      */
     void saveMember(Member member);
 
     /**
-     * 삭제
+     * 사용자 정보 삭제
      */
     void deleteMember(Long userId);
 }

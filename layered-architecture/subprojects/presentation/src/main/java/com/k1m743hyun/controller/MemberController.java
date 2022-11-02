@@ -35,24 +35,20 @@ public class MemberController {
     @ApiImplicitParam(name = "userId", paramType = "path", dataType = "long", required = true, value = "사용자 ID", example = "1")
     @GetMapping("/userId/{userId}")
     public MemberResponseDto getMemberByUserId(@PathVariable Long userId) {
-
-        MemberRequestVo requestVo = MemberRequestVo.builder()
+        return memberService.getMemberByUserId(MemberRequestVo.builder()
             .userId(userId)
-            .build();
-
-        return memberService.getMemberByUserId(requestVo.convert());
+            .build()
+            .convert());
     }
 
     @ApiOperation(value = "사용자 이름으로 사용자 정보 조회", notes = "사용자의 이름을 통해 사용자의 정보를 조회한다.")
     @ApiImplicitParam(name = "userName", paramType = "path", dataType = "string", required = true, value = "사용자 이름", example = "spring")
     @GetMapping("/userName/{userName}")
     public List<MemberResponseDto> getMemberByUserName(@PathVariable String userName) {
-
-        MemberRequestVo requestVo = MemberRequestVo.builder()
+        return memberService.getMemberByUserName(MemberRequestVo.builder()
             .userName(userName)
-            .build();
-
-        return memberService.getMemberByUserName(requestVo.convert());
+            .build()
+            .convert());
     }
 
     @ApiOperation(value = "사용자 정보 전체 조회", notes = "모든 사용자의 정보를 조회한다.")

@@ -4,6 +4,7 @@ import com.k1m743hyun.data.entity.Member;
 import com.k1m743hyun.provider.jpa.MemberJpaRepository;
 import java.util.List;
 import java.util.Optional;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,6 +26,7 @@ class MemberRepositoryImplTest {
     @InjectMocks
     MemberRepositoryImpl memberRepository;
 
+    @DisplayName("사용자 아이디로 사용자 정보 조회")
     @Test
     void getMemberByUserId() {
 
@@ -40,6 +42,7 @@ class MemberRepositoryImplTest {
         then(memberJpaRepository).should().findById(userId);
     }
 
+    @DisplayName("사용자 이름으로 사용자 정보 조회")
     @Test
     void getMemberByUserName() {
 
@@ -55,6 +58,7 @@ class MemberRepositoryImplTest {
         then(memberJpaRepository).should().findByUserName(userName);
     }
 
+    @DisplayName("사용자 정보 전체 조회")
     @Test
     void getAllMembers() {
 
@@ -68,6 +72,7 @@ class MemberRepositoryImplTest {
         then(memberJpaRepository).should().findAll();
     }
 
+    @DisplayName("사용자 정보 등록")
     @Test
     void saveMember() {
 
@@ -81,6 +86,7 @@ class MemberRepositoryImplTest {
         then(memberJpaRepository).should().save(member);
     }
 
+    @DisplayName("사용자 정보 삭제")
     @Test
     void deleteMember() {
 

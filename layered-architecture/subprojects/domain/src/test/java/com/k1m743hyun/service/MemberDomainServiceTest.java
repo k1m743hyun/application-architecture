@@ -6,6 +6,7 @@ import com.k1m743hyun.data.mapper.MemberMapper;
 import com.k1m743hyun.repository.MemberRepository;
 import java.util.List;
 import java.util.Optional;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,12 +31,12 @@ class MemberDomainServiceTest {
     @InjectMocks
     MemberDomainService memberDomainService;
 
+    @DisplayName("사용자 아이디로 사용자 정보 조회")
     @Test
     void getMemberByUserId() {
 
         // given
         Long userId = anyLong();
-
         given(memberRepository.getMemberByUserId(userId)).willReturn(Optional.of(Member.builder().build()));
 
         // when
@@ -45,12 +46,12 @@ class MemberDomainServiceTest {
         then(memberRepository).should().getMemberByUserId(userId);
     }
 
+    @DisplayName("사용자 이름으로 사용자 정보 조회")
     @Test
     void getMemberByUserName() {
 
         // given
         String userName = anyString();
-
         given(memberRepository.getMemberByUserName(userName)).willReturn(List.of(Member.builder().build()));
 
         // when
@@ -60,6 +61,7 @@ class MemberDomainServiceTest {
         then(memberRepository).should().getMemberByUserName(userName);
     }
 
+    @DisplayName("사용자 정보 전체 조회")
     @Test
     void getAllMembers() {
 
@@ -72,16 +74,15 @@ class MemberDomainServiceTest {
         then(memberRepository).should().getAllMembers();
     }
 
+    @DisplayName("사용자 정보 등록")
     @Test
     void saveMember() {
 
         // given
         String userName = anyString();
-
         MemberRequestDto requestDto = MemberRequestDto.builder()
             .userName(userName)
             .build();
-
         Member member = memberMapper.toEntity(requestDto);
 
         // when
@@ -91,16 +92,15 @@ class MemberDomainServiceTest {
         then(memberRepository).should().saveMember(member);
     }
 
+    @DisplayName("사용자 정보 수정")
     @Test
     void editMember() {
 
         // given
         Long userId = anyLong();
-
         MemberRequestDto requestDto = MemberRequestDto.builder()
             .userId(userId)
             .build();
-
         given(memberRepository.getMemberByUserId(userId)).willReturn(Optional.of(Member.builder().build()));
 
         // when
@@ -110,6 +110,7 @@ class MemberDomainServiceTest {
         then(memberRepository).should().getMemberByUserId(userId);
     }
 
+    @DisplayName("사용자 정보 삭제")
     @Test
     void deleteMember() {
 

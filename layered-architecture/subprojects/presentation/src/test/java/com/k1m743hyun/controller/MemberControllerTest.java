@@ -44,7 +44,6 @@ class MemberControllerTest {
 
         // given
         Long userId = 1L;
-
         given(memberService.getMemberByUserId(any(MemberRequestDto.class))).willReturn(MemberResponseDto.builder().build());
 
         // when
@@ -64,7 +63,6 @@ class MemberControllerTest {
 
         // given
         String userName = "spring";
-
         given(memberService.getMemberByUserName(any(MemberRequestDto.class))).willReturn(List.of(MemberResponseDto.builder().build()));
 
         // when
@@ -103,7 +101,6 @@ class MemberControllerTest {
         // given
         Long userId = 1L;
         String userName = "spring";
-
         MemberRequestVo requestVo = MemberRequestVo.builder()
             .userId(userId)
             .userName(userName)
@@ -131,12 +128,10 @@ class MemberControllerTest {
         // given
         Long userId = 1L;
         String userName = "spring";
-
         MemberRequestVo requestVo = MemberRequestVo.builder()
             .userId(userId)
             .userName(userName)
             .build();
-
         given(memberService.editMember(any(MemberRequestDto.class))).willReturn(MemberResponseDto.builder().build());
 
         // when
@@ -158,7 +153,6 @@ class MemberControllerTest {
 
         // given
         Long userId = 1L;
-
         MemberRequestVo requestVo = MemberRequestVo.builder()
             .userId(userId)
             .build();

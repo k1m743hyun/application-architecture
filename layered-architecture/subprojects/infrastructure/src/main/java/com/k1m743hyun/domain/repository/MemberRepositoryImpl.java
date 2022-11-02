@@ -18,20 +18,23 @@ public class MemberRepositoryImpl implements MemberRepository {
     private final MemberJpaRepository memberJpaRepository;
 
     /**
-     * 상세 조회
+     * 사용자 아이디로 사용자 정보 조회
      */
     @Override
     public Optional<Member> getMemberByUserId(Long userId) {
         return memberJpaRepository.findById(userId);
     }
 
+    /**
+     * 사용자 이름으로 사용자 정보 조회
+     */
     @Override
     public List<Member> getMemberByUserName(String userName) {
         return memberJpaRepository.findByUserName(userName);
     }
 
     /**
-     * 리스트 조회
+     * 사용자 정보 전체 조회
      */
     @Override
     public List<Member> getAllMembers() {
@@ -39,7 +42,7 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
 
     /**
-     * 등록
+     * 사용자 정보 등록
      */
     @Override
     public void saveMember(Member member) {
@@ -47,7 +50,7 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
 
     /**
-     * 삭제
+     * 사용자 정보 삭제
      */
     @Override
     public void deleteMember(Long userId) {

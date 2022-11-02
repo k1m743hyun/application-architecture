@@ -32,7 +32,6 @@ public class Member {
     public Member update(String userName) {
 
         this.userName = userName;
-
         return this;
     }
 }

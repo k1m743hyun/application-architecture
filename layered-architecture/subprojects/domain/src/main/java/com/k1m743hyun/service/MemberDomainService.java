@@ -20,26 +20,29 @@ public class MemberDomainService {
     private final MemberMapper memberMapper;
 
     /**
-     * 상세 조회
+     * 사용자 아이디로 사용자 정보 조회
      */
     public Member getMemberByUserId(MemberRequestDto requestDto){
         return memberRepository.getMemberByUserId(requestDto.getUserId()).orElseThrow(() -> new NoSuchElementException());
     }
 
+    /**
+     * 사용자 이름으로 사용자 정보 조회
+     */
     public List<Member> getMemberByUserName(MemberRequestDto requestDto) {
 
         return memberRepository.getMemberByUserName(requestDto.getUserName());
     }
 
     /**
-     * 리스트 조회
+     * 사용자 정보 전체 조회
      */
     public List<Member> getAllMembers() {
         return memberRepository.getAllMembers();
     }
 
     /**
-     * 등록
+     * 사용자 정보 등록
      */
     public Member saveMember(MemberRequestDto requestDto) {
 
@@ -51,7 +54,7 @@ public class MemberDomainService {
     }
 
     /**
-     * 수정
+     * 사용자 정보 수정
      */
     public Member editMember(MemberRequestDto requestDto) {
 
@@ -63,7 +66,7 @@ public class MemberDomainService {
     }
 
     /**
-     * 삭제
+     * 사용자 정보 삭제
      */
     public Member deleteMember(MemberRequestDto requestDto) {
 

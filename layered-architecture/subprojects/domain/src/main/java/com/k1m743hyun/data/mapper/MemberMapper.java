@@ -10,6 +10,5 @@ import org.mapstruct.Mapper;
 public interface MemberMapper {
 
     Member toEntity(MemberRequestDto requestDto);
-
     MemberResponseDto toDto(Member request);
 }
