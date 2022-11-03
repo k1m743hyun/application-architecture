@@ -105,7 +105,6 @@ class MemberControllerTest {
             .userId(userId)
             .userName(userName)
             .build();
-
         given(memberService.saveMember(any(MemberRequestDto.class))).willReturn(MemberResponseDto.builder().build());
 
         // when
@@ -156,7 +155,6 @@ class MemberControllerTest {
         MemberRequestVo requestVo = MemberRequestVo.builder()
             .userId(userId)
             .build();
-
         given(memberService.deleteMember(any(MemberRequestDto.class))).willReturn(MemberResponseDto.builder().build());
 
         // when

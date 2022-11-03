@@ -59,7 +59,6 @@ public class MemberDomainService {
     public Member editMember(MemberRequestDto requestDto) {
 
         Member member = memberRepository.getMemberByUserId(requestDto.getUserId()).orElseThrow(() -> new NoSuchElementException());
-
         member.update(requestDto.getUserName());
 
         return member;

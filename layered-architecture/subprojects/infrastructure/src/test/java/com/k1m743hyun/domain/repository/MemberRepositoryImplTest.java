@@ -32,7 +32,6 @@ class MemberRepositoryImplTest {
 
         // given
         Long userId = anyLong();
-
         given(memberJpaRepository.findById(userId)).willReturn(Optional.of(Member.builder().build()));
 
         // when
@@ -48,7 +47,6 @@ class MemberRepositoryImplTest {
 
         // given
         String userName = anyString();
-
         given(memberJpaRepository.findByUserName(userName)).willReturn(List.of(Member.builder().build()));
 
         // when
