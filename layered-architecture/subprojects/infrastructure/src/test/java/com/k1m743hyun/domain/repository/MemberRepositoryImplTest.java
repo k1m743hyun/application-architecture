@@ -1,7 +1,7 @@
 package com.k1m743hyun.domain.repository;
 
 import com.k1m743hyun.data.entity.Member;
-import com.k1m743hyun.provider.jpa.MemberJpaRepository;
+import com.k1m743hyun.provider.jpa.MemberJpaEmRepository;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
@@ -21,10 +21,11 @@ import static org.mockito.BDDMockito.then;
 class MemberRepositoryImplTest {
 
     @Mock
-    MemberJpaRepository memberJpaRepository;
+    //MemberJpaRepository memberRepository;
+    MemberJpaEmRepository memberRepository;
 
     @InjectMocks
-    MemberRepositoryImpl memberRepository;
+    MemberRepositoryImpl memberRepositoryImpl;
 
     @DisplayName("사용자 아이디로 사용자 정보 조회")
     @Test
@@ -32,13 +33,13 @@ class MemberRepositoryImplTest {
 
         // given
         Long userId = anyLong();
-        given(memberJpaRepository.findById(userId)).willReturn(Optional.of(Member.builder().build()));
+        given(memberRepository.findById(userId)).willReturn(Optional.of(Member.builder().build()));
 
         // when
-        Optional<Member> result = memberRepository.getMemberByUserId(userId);
+        Optional<Member> result = memberRepositoryImpl.getMemberByUserId(userId);
 
         // then
-        then(memberJpaRepository).should().findById(userId);
+        then(memberRepository).should().findById(userId);
     }
 
     @DisplayName("사용자 이름으로 사용자 정보 조회")
@@ -47,13 +48,13 @@ class MemberRepositoryImplTest {
 
         // given
         String userName = anyString();
-        given(memberJpaRepository.findByUserName(userName)).willReturn(List.of(Member.builder().build()));
+        given(memberRepository.findByUserName(userName)).willReturn(List.of(Member.builder().build()));
 
         // when
-        List<Member> result = memberRepository.getMemberByUserName(userName);
+        List<Member> result = memberRepositoryImpl.getMemberByUserName(userName);
 
         // then
-        then(memberJpaRepository).should().findByUserName(userName);
+        then(memberRepository).should().findByUserName(userName);
     }
 
     @DisplayName("사용자 정보 전체 조회")
@@ -61,13 +62,13 @@ class MemberRepositoryImplTest {
     void getAllMembers() {
 
         // given
-        given(memberJpaRepository.findAll()).willReturn(List.of(Member.builder().build()));
+        given(memberRepository.findAll()).willReturn(List.of(Member.builder().build()));
 
         // when
-        List<Member> result = memberRepository.getAllMembers();
+        List<Member> result = memberRepositoryImpl.getAllMembers();
 
         // then
-        then(memberJpaRepository).should().findAll();
+        then(memberRepository).should().findAll();
     }
 
     @DisplayName("사용자 정보 등록")
@@ -78,10 +79,10 @@ class MemberRepositoryImplTest {
         Member member = any(Member.class);
 
         // when
-        memberRepository.saveMember(member);
+        memberRepositoryImpl.saveMember(member);
 
         // then
-        then(memberJpaRepository).should().save(member);
+        then(memberRepository).should().save(member);
     }
 
     @DisplayName("사용자 정보 삭제")
@@ -92,9 +93,9 @@ class MemberRepositoryImplTest {
         Long userId = anyLong();
 
         // when
-        memberRepository.deleteMember(userId);
+        memberRepositoryImpl.deleteMember(userId);
 
         // then
-        then(memberJpaRepository).should().deleteById(userId);
+        then(memberRepository).should().deleteById(userId);
     }
 }

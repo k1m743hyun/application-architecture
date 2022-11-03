@@ -1,10 +1,11 @@
 package com.k1m743hyun.provider.jpa;
 
 import com.k1m743hyun.data.entity.Member;
-import org.springframework.stereotype.Repository;
-
+import java.util.List;
+import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class MemberJpaEmRepository {
@@ -12,57 +13,100 @@ public class MemberJpaEmRepository {
     private EntityManager em;
 
     /**
-     * 사용자 정보 조회
+     * 사용자 아이디로 사용자 정보 조회
      */
-    public Member getMember(Long userId) {
+    public Optional<Member> findById(Long userId) {
 
         String jpql = "" +
-                "SELECT *       \n" +
-                "FROM MEMBER    \n" +
-                "WHERE id = :userId \n";
+            "SELECT *               \n" +
+            "FROM MEMBER            \n" +
+            "WHERE USERID = :userId \n";
 
-        Query query = em.createNativeQuery(jpql, Member.class)
-                .setParameter("userId", userId);
+        Query query = em.createNativeQuery(jpql)
+            .setParameter("userId", userId);
 
-        return (Member) query.getSingleResult();
+        List<Member> resultList = query.getResultList();
+        Member member;
+        if (resultList.isEmpty()) {
+            member = null;
+        } else {
+            member = resultList.get(0);
+        };
+
+        return Optional.of(member);
+    }
+
+    /**
+     * 사용자 이름으로 사용자 정보 조회
+     */
+    public List<Member> findByUserName(String userName) {
+
+        String jpql = "" +
+            "SELECT *                   \n" +
+            "FROM MEMBER                \n" +
+            "WHERE USERNAME = :userName \n";
+
+        Query query = em.createNativeQuery(jpql)
+            .setParameter("userName", userName);
+
+        return query.getResultList();
+    }
+
+    public List<Member> findAll() {
+
+        String jpql = "" +
+            "SELECT *       \n" +
+            "FROM MEMBER    \n";
+
+        Query query = em.createNativeQuery(jpql);
+
+        return query.getResultList();
     }
 
     /**
      * 사용자 정보 등록
      */
-    public Member saveMember(Member member) {
+    public void save(Member member) {
 
-        String jpql = "";
+        String jpql = "" +
+            "INSERT INTO MEMBER \n" +
+            "   (USERNAME)      \n" +
+            "VAULES (:userName) \n";
 
-        Query query = em.createNativeQuery(jpql, Member.class);
+        Query query = em.createNativeQuery(jpql)
+            .setParameter("userName", member.getUserName());
         query.executeUpdate();
-
-        return member;
     }
 
     /**
      * 사용자 정보 수정
      */
-    public Member editMember(Member member) {
-
-        String jpql = "";
-
-        Query query = em.createNativeQuery(jpql, Member.class);
-        query.executeUpdate();
-
-        return member;
-    }
+    //public Member editMember(Member member) {
+    //
+    //    String jpql = "" +
+    //        "UPDATE MEMBER              \n" +
+    //        "SET userName = :userName   \n" +
+    //        "WHERE userId = :userId     \n";
+    //
+    //    Query query = em.createNativeQuery(jpql, Member.class)
+    //        .setParameter("userName", member.getUserName())
+    //        .setParameter("userId", member.getUserId());
+    //    query.executeUpdate();
+    //
+    //    return member;
+    //}
 
     /**
      * 사용자 정보 삭제
      */
-    public Member deleteMember(Long userId) {
+    public void deleteById(Long userId) {
 
-        String jpql = "";
+        String jpql = "" +
+            "DELETE FROM MEMBER     \n" +
+            "WHERE USERID = :userId \n";
 
-        Query query = em.createNativeQuery(jpql, Member.class);
+        Query query = em.createNativeQuery(jpql)
+            .setParameter("userId", userId);
         query.executeUpdate();
-
-        return Member.builder().userId(userId).build();
     }
 }

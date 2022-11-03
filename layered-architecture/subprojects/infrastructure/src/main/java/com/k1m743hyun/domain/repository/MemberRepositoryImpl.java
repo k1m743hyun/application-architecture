@@ -1,7 +1,7 @@
 package com.k1m743hyun.domain.repository;
 
 import com.k1m743hyun.data.entity.Member;
-import com.k1m743hyun.provider.jpa.MemberJpaRepository;
+import com.k1m743hyun.provider.jpa.MemberJpaEmRepository;
 import com.k1m743hyun.repository.MemberRepository;
 import java.util.List;
 import java.util.Optional;
@@ -15,14 +15,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MemberRepositoryImpl implements MemberRepository {
 
-    private final MemberJpaRepository memberJpaRepository;
+    //private final MemberJpaRepository memberRepository;
+    private final MemberJpaEmRepository memberRepository;
 
     /**
      * 사용자 아이디로 사용자 정보 조회
      */
     @Override
     public Optional<Member> getMemberByUserId(Long userId) {
-        return memberJpaRepository.findById(userId);
+        return memberRepository.findById(userId);
     }
 
     /**
@@ -30,7 +31,7 @@ public class MemberRepositoryImpl implements MemberRepository {
      */
     @Override
     public List<Member> getMemberByUserName(String userName) {
-        return memberJpaRepository.findByUserName(userName);
+        return memberRepository.findByUserName(userName);
     }
 
     /**
@@ -38,7 +39,7 @@ public class MemberRepositoryImpl implements MemberRepository {
      */
     @Override
     public List<Member> getAllMembers() {
-        return memberJpaRepository.findAll();
+        return memberRepository.findAll();
     }
 
     /**
@@ -46,7 +47,7 @@ public class MemberRepositoryImpl implements MemberRepository {
      */
     @Override
     public void saveMember(Member member) {
-        memberJpaRepository.save(member);
+        memberRepository.save(member);
     }
 
     /**
@@ -54,6 +55,6 @@ public class MemberRepositoryImpl implements MemberRepository {
      */
     @Override
     public void deleteMember(Long userId) {
-        memberJpaRepository.deleteById(userId);
+        memberRepository.deleteById(userId);
     }
 }
