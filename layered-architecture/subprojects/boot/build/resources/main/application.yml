@@ -1,0 +1,28 @@
+# Server
+server:
+  port: 8080
+  shutdown: graceful
+  tomcat:
+    connection-timeout: 2800
+    threads:
+      max: 250
+      min-spare: 250
+
+spring:
+  #h2:
+  #  console:
+  #    enabled: true
+  #    path: /h2
+  jpa:
+    database: h2
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: "true"
+  datasource:
+    driver-class-name: "org.h2.Driver"
+    url: "jdbc:h2:tcp://localhost/~/personal/application-architecture/layered-architecture/test"
+    username: "sa"
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher

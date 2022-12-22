@@ -17,7 +17,7 @@ subprojects {
 	apply plugin: 'io.spring.dependency-management'
 	apply plugin: 'java'
 
-	group = 'com.k1m743hyun'
+	group = 'com.thkim0022'
 	version = '0.0.1-SNAPSHOT'
 	sourceCompatibility = '11'
 
